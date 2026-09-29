@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/cohere-design-system-da6b25eb-b395-4f85-a2de-be7e75f992f9/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/cohere-design-system-da6b25eb-b395-4f85-a2de-be7e75f992f9/styles.css">
+<script src="_ds/cohere-design-system-da6b25eb-b395-4f85-a2de-be7e75f992f9/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Space+Mono:wght@400;700&family=Noto+Kufi+Arabic:wght@400;500;700&display=swap">
+<style>
+  img { max-width:100%; }
+  .hero-scrim { position:absolute; inset:0; background:linear-gradient(90deg,rgba(10,22,40,0.9) 0%,rgba(10,22,40,0.66) 38%,rgba(10,22,40,0.3) 68%,rgba(10,22,40,0.12) 100%); }
+  [dir="rtl"] .hero-scrim { background:linear-gradient(270deg,rgba(10,22,40,0.9) 0%,rgba(10,22,40,0.66) 38%,rgba(10,22,40,0.3) 68%,rgba(10,22,40,0.12) 100%); }
+  body { margin:0; background:#fff7f1; font-family:'Poppins',sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#fb5f5f; text-decoration:none; }
+  a:hover { color:#e04747; }
+  @media (max-width:900px) { .pf-row { grid-template-columns:1fr !important; } }
+  [dir="rtl"] .yc-mono { font-family:'Noto Kufi Arabic',sans-serif !important; letter-spacing:normal !important; text-transform:none !important; }
+  [dir="rtl"] { font-family:'Noto Kufi Arabic','Poppins',sans-serif; }
+  .nav-links { flex-wrap:nowrap !important; }
+  .nav-burger { display:none; }
+  .nav-panel { display:none; }
+  @media (max-width:1080px) { .nav-links { display:none !important; } .nav-signin { display:none !important; } .nav-burger { display:inline-flex !important; } .nav-actions { margin-left:auto; } .nav-panel { display:block; } }
+  .yc-italic { font-style:italic; color:#fb5f5f; }
+  .yc-mono { font-family:'Space Mono',monospace; letter-spacing:0.12em; text-transform:uppercase; }
+  .yc-disp { line-height:1.22; font-family:'Poppins',sans-serif; font-weight:700; letter-spacing:-0.02em; color:#132340; }
+</style>
+</helmet>
+
+<div ref="{{ root }}" style="background:#fff7f1; color:#132340; overflow-x:clip;">
+
+  <!-- ================= NAV ================= -->
+  <div style="position:sticky; top:0; z-index:40; background:rgba(255,247,241,0.92); backdrop-filter:blur(12px); border-bottom:1px solid rgba(19,35,64,0.06);">
+    <div style="max-width:1440px; margin:0 auto; padding:14px clamp(16px,3vw,40px); display:flex; align-items:center; gap:18px; flex-wrap:wrap;">
+      <a href="#top" style="display:flex; align-items:center; gap:10px; color:#132340;">
+        <img src="assets/logo.png" alt="youcloud" style="height:26px; width:auto;">
+      </a>
+      <div class="nav-links" style="flex:1; display:flex; justify-content:center; gap:clamp(14px,2vw,34px); font-size:16px; font-weight:500; flex-wrap:wrap;">
+        <a href="#how" data-i18n="nav.how" style="color:#132340;">How it works</a>
+        <a href="YouCloud Solutions.dc.html" data-i18n="nav.sol" style="color:#132340;">Solutions</a>
+        <a href="#hardware" data-i18n="nav.hw" style="color:#132340;">Hardware</a>
+        <a href="#pricing" data-i18n="nav.pricing" style="color:#132340;">Pricing</a>
+        <a href="YouCloud Enterprise.dc.html" data-i18n="nav.ent" style="color:#132340;">Enterprise</a>
+      </div>
+      <div class="nav-actions" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div style="display:flex; background:#fff; border:1px solid #f0ddd2; border-radius:999px; padding:3px;">
+          <button onClick="{{ setEN }}" class="yc-mono" style="{{ enPill }}">EN</button>
+          <button onClick="{{ setAR }}" style="{{ arPill }}">العربية</button>
+        </div>
+        <button onClick="{{ openForm }}" data-i18n="nav.demo" style="background:#fb5f5f; color:#fff; border:none; border-radius:10px; padding:13px 22px; font-family:'Poppins',sans-serif; font-size:16px; font-weight:600; cursor:pointer;" style-hover="opacity:0.86">Book a demo</button>
+      
+        <button class="nav-burger" onClick="{{ toggleMenu }}" aria-label="Menu" style="align-items:center; justify-content:center; width:44px; height:44px; background:#fff; border:1px solid #f0ddd2; border-radius:12px; cursor:pointer; font-size:18px; color:#132340;">{{ menuIcon }}</button>
+      </div>
+    </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="nav-panel" style="background:#fff7f1; border-bottom:1px solid #f4e6dd; padding:6px clamp(16px,3vw,40px) 18px;">
+      <div style="display:flex; flex-direction:column;">
+        <a href="#how" onClick="{{ closeMenu }}" data-i18n="nav.how" style="color:#132340; font-size:17px; font-weight:500; padding:14px 2px; border-bottom:1px solid #f7efe9;">How it works</a>
+        <a href="YouCloud Solutions.dc.html" onClick="{{ closeMenu }}" data-i18n="nav.sol" style="color:#132340; font-size:17px; font-weight:500; padding:14px 2px; border-bottom:1px solid #f7efe9;">Solutions</a>
+        <a href="#hardware" onClick="{{ closeMenu }}" data-i18n="nav.hw" style="color:#132340; font-size:17px; font-weight:500; padding:14px 2px; border-bottom:1px solid #f7efe9;">Hardware</a>
+        <a href="#pricing" onClick="{{ closeMenu }}" data-i18n="nav.pricing" style="color:#132340; font-size:17px; font-weight:500; padding:14px 2px; border-bottom:1px solid #f7efe9;">Pricing</a>
+        <a href="YouCloud Enterprise.dc.html" onClick="{{ closeMenu }}" data-i18n="nav.ent" style="color:#132340; font-size:17px; font-weight:500; padding:14px 2px; border-bottom:1px solid #f7efe9;">Enterprise</a>
+      </div>
+    </div>
+  </sc-if>
+  </div>
+
+  <!-- ================= HERO ================= -->
+  <div id="top" style="position:relative; background:#0c1a30; overflow:hidden;">
+    <img src="assets/retail-hero.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%; opacity:0.95;">
+    <div class="hero-scrim"></div>
+    <div style="position:relative; max-width:1440px; margin:0 auto; padding:clamp(40px,5vw,70px) clamp(16px,3vw,40px) 0; display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:32px;">
+      <div style="flex:1 1 560px; max-width:640px;">
+        <div style="display:inline-flex; align-items:center; gap:10px; border:1px solid rgba(255,255,255,0.28); border-radius:999px; padding:9px 18px;">
+          <span style="width:9px; height:9px; border-radius:50%; background:#fb5f5f;"></span>
+          <span class="yc-mono" data-i18n="hero.badge" style="font-size:12px; color:#fff;">Launching in the UAE</span>
+          <span style="color:rgba(255,255,255,0.5); font-size:12px;">· أهلاً</span>
+        </div>
+        <h1 class="yc-disp" style="font-size:clamp(34px,4.6vw,64px); line-height:1.22; color:#fff; margin:22px 0 0;">
+          <span data-i18n="hero.t1">One tool for all your</span><br>
+          <span class="yc-italic" data-i18n="hero.t2" style="color:#fb5f5f;">business headache.</span>
+        </h1>
+        <div style="font-family:'Noto Kufi Arabic',sans-serif; font-size:19px; color:rgba(255,255,255,0.72); margin-top:10px; text-align:start;">حل واحد لكل احتياجات عملك</div>
+        <p data-i18n="hero.sub" style="font-size:19px; line-height:1.55; color:rgba(255,255,255,0.82); max-width:600px; margin:22px 0 0;">Billing, Stock, Payments, QR Ordering, Loyalty, Promotions, AI Insights and Back Office (HR, Payroll, Accounts) — One kit. One app. Live in your business in under an hour.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:20px;">
+          <span data-i18n="hero.seg1" style="border:1px solid rgba(255,255,255,0.28); border-radius:999px; padding:8px 16px; color:#fff; font-size:14px;">Retail shops</span>
+          <span data-i18n="hero.seg2" style="border:1px solid rgba(255,255,255,0.28); border-radius:999px; padding:8px 16px; color:#fff; font-size:14px;">Restaurants</span>
+          <span data-i18n="hero.seg3" style="border:1px solid rgba(255,255,255,0.28); border-radius:999px; padding:8px 16px; color:#fff; font-size:14px;">FMCG</span>
+          <span data-i18n="hero.seg4" style="border:1px solid rgba(255,255,255,0.28); border-radius:999px; padding:8px 16px; color:#fff; font-size:14px;">Service</span>
+        </div>
+        <div style="display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;">
+          <button onClick="{{ openForm }}" style="background:#fb5f5f; color:#fff; border:none; border-radius:12px; padding:18px 28px; font-family:'Poppins',sans-serif; font-size:17px; font-weight:600; cursor:pointer;" style-hover="opacity:0.86"><span data-i18n="hero.cta1">Book a free 15-min demo</span> →</button>
+          <a href="#how" data-i18n="hero.cta2" style="background:#fff; color:#132340; border-radius:12px; padding:18px 28px; font-size:17px; font-weight:600;">See how it works</a>
+        </div>
+        <div style="margin-top:44px; padding-top:30px; border-top:1px solid rgba(255,255,255,0.16); display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:26px 32px; padding-bottom:56px;">
+          <div>
+            <div style="color:#fff; font-size:15px;"><span class="yc-mono" style="color:#fb5f5f; font-size:15px; letter-spacing:0.02em;" data-i18n="hero.from">from AED</span> <span class="yc-disp" style="font-size:34px; color:#fff;">199</span><span class="yc-mono" style="font-size:13px; color:rgba(255,255,255,0.7);">/mo</span></div>
+            <div data-i18n="hero.s1" style="font-size:15px; color:rgba(255,255,255,0.72); margin-top:4px;">All-in. POS + payments + back-office + AI.</div>
+          </div>
+          <div>
+            <div><span class="yc-disp" style="font-size:34px; color:#fff;">60</span> <span class="yc-mono" style="font-size:13px; color:rgba(255,255,255,0.7);">min</span></div>
+            <div data-i18n="hero.s2" style="font-size:15px; color:rgba(255,255,255,0.72); margin-top:4px;">To go live in your shop, kitchen or salon.</div>
+          </div>
+          <div>
+            <div><span class="yc-disp" style="font-size:34px; color:#fff;">T</span><span class="yc-mono" style="font-size:13px; color:rgba(255,255,255,0.7);">+0</span></div>
+            <div data-i18n="hero.s3" style="font-size:15px; color:rgba(255,255,255,0.72); margin-top:4px;">Settle same-day to any UAE IBAN.</div>
+          </div>
+        </div>
+      </div>
+      <div style="flex:0 1 320px; min-width:250px; align-self:flex-start; margin-left:auto; background:#fffaf6; border-radius:16px; padding:18px 20px; box-shadow:0 24px 60px rgba(0,0,0,0.35);">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="yc-mono" style="font-size:11px; color:#7b8699;">Dubai Marina · just now</span>
+          <span class="yc-mono" style="font-size:11px; color:#17a673;">● LIVE</span>
+        </div>
+        <div style="margin-top:10px;"><span class="yc-mono" style="font-size:16px; color:#8b93a4;">AED</span> <span class="yc-disp" style="font-size:32px;">182.40</span></div>
+        <div class="yc-mono" style="font-size:12px; color:#17a673; margin-top:6px; text-transform:none; letter-spacing:0.04em;">✓ Settled to Emirates NBD · T+0</div>
+        <div style="margin-top:14px; background:#fff1ea; border-radius:10px; padding:9px 12px; display:flex; justify-content:space-between;">
+          <span class="yc-mono" style="font-size:11px; color:#fb5f5f;">TAP</span><span class="yc-mono" style="font-size:11px; color:#e0b6ad;">→</span>
+          <span class="yc-mono" style="font-size:11px; color:#fb5f5f;">AUTH</span><span class="yc-mono" style="font-size:11px; color:#e0b6ad;">→</span>
+          <span class="yc-mono" style="font-size:11px; color:#fb5f5f;">SETTLE</span><span class="yc-mono" style="font-size:11px; color:#e0b6ad;">→</span>
+          <span class="yc-mono" style="font-size:11px; color:#fb5f5f;">BANK</span>
+        </div>
+      </div>
+    </div>
+    <div style="position:relative; background:#0d1e37; padding:26px clamp(16px,3vw,40px);">
+      <div style="max-width:1400px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:10px 22px; color:#fff; font-size:15px; white-space:nowrap;">
+        <span><span style="color:#fb5f5f;">✓</span> <span data-i18n="trust.a1">under</span> <b class="yc-mono" style="font-size:14px;">CB UAE</b> <span data-i18n="trust.a2">licensed acquiring partner</span></span>
+        <span style="color:rgba(255,255,255,0.25);">·</span>
+        <span><span style="color:#fb5f5f;">✓</span> <b class="yc-mono" style="font-size:14px;">FTA</b> <span data-i18n="trust.b">e-invoicing ready</span></span>
+        <span style="color:rgba(255,255,255,0.25);">·</span>
+        <span><span style="color:#fb5f5f;">✓</span> <b class="yc-mono" style="font-size:14px;">T+0</b> <span data-i18n="trust.c">to any UAE IBAN</span></span>
+        <span style="color:rgba(255,255,255,0.25);">·</span>
+        <span><span style="color:#fb5f5f;">✓</span> <span data-i18n="trust.d">24/7 support</span> · <b>English</b> · العربية · हिंदी · <b>Tagalog</b></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= THE HEADACHE ================= -->
+  <div style="background:#fff5ee; padding:clamp(52px,7vw,96px) clamp(16px,3vw,40px);">
+    <div style="max-width:1440px; margin:0 auto;">
+      <div style="text-align:center;">
+        <span class="yc-mono" style="display:inline-block; background:#ffe1dc; color:#fb5f5f; border-radius:999px; padding:8px 18px; font-size:12px;">● The headache</span>
+        <h2 class="yc-disp" style="font-size:clamp(28px,3.4vw,44px); margin:22px 0 0;"><span data-i18n="head.t1">Eight logins. Eight bills.</span> <span class="yc-italic" data-i18n="head.t2">Zero sleep.</span></h2>
+        <p data-i18n="head.sub" style="font-size:18px; color:#5b6579; max-width:780px; margin:16px auto 0; line-height:1.55;">Every UAE merchant we meet is paying for the same eight tools — and losing an hour a day gluing them together with Excel and group chats.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr)); gap:34px; margin-top:56px; align-items:start;">
+        <div style="background:#fff; border-radius:22px; padding:30px;">
+          <span class="yc-mono" style="display:inline-block; background:#f4f1ef; color:#6c7687; border-radius:999px; padding:7px 14px; font-size:11px;">What most merchants pay today</span>
+          <h3 class="yc-disp" style="font-size:26px; margin:20px 0 6px;" data-i18n="head.frank">The Frankenstein stack</h3>
+          <p data-i18n="head.franksub" style="font-size:16px; color:#5b6579; margin:0;">Nine subscriptions. Eight logins. Zero of them talking to each other.</p>
+          <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:22px;">
+            <sc-for list="{{ stack }}" as="row" hint-placeholder-count="8">
+              <div style="display:flex; align-items:center; justify-content:space-between; background:#fdf6f2; border-radius:10px; padding:12px 14px;">
+                <span style="font-size:15px; color:#6c7687; text-decoration:line-through;">● {{ row.name }}</span>
+                <span class="yc-mono" style="font-size:13px; color:#fb5f5f; text-decoration:line-through;">AED {{ row.price }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:#ffd9d4; border-radius:12px; padding:16px 18px; margin-top:18px;">
+            <b data-i18n="head.total" style="font-size:16px; color:#b3403f;">Total you're paying today</b>
+            <span style="text-decoration:line-through; color:#b3403f;"><span class="yc-mono" style="font-size:13px;">AED</span> <b class="yc-disp" style="font-size:22px; color:#b3403f;">554</b><span class="yc-mono" style="font-size:12px;">/mo</span></span>
+          </div>
+        </div>
+        <div style="background:linear-gradient(140deg,#132340 0%,#1b1f3e 60%,#2a1f3c 100%); border-radius:22px; padding:30px;">
+          <span class="yc-mono" style="display:block; border:1px solid rgba(255,255,255,0.14); border-radius:999px; padding:8px 16px; font-size:11px; color:rgba(255,255,255,0.7);">What you replace it with</span>
+          <div class="yc-disp" style="font-size:32px; color:#fff; margin-top:20px;">you<span style="color:#fb5f5f;">cloud</span></div>
+          <p style="font-size:16px; color:rgba(255,255,255,0.78); margin:10px 0 0; line-height:1.6;"><span data-i18n="head.yc1">One app. One login. One monthly bill.</span><br><span data-i18n="head.yc2">Every module talks to every other module.</span></p>
+          <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:24px;">
+            <sc-for list="{{ modules }}" as="m" hint-placeholder-count="8">
+              <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:16px 8px; text-align:center;">
+                <div style="font-size:16px; color:#fff; opacity:0.8;">{{ m.icon }}</div>
+                <div class="yc-mono" style="font-size:11px; color:#fff; margin-top:8px; text-transform:none; letter-spacing:0.04em;">{{ m.name }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:#fb5f5f; border-radius:14px; padding:18px 22px; margin-top:24px;">
+            <b data-i18n="head.allin" style="color:#fff; font-size:16px;">From, all-in</b>
+            <span style="color:#fff;"><span class="yc-mono" style="font-size:13px;">AED</span> <b class="yc-disp" style="font-size:24px; color:#fff;">199</b><span class="yc-mono" style="font-size:12px;">/mo</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= LIVE IN 60 MINUTES ================= -->
+  <div style="background:#fff; padding:clamp(52px,7vw,96px) clamp(16px,3vw,40px);">
+    <div style="max-width:1440px; margin:0 auto; text-align:center;">
+      <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
+        <span style="font-family:'Noto Kufi Arabic',sans-serif; font-size:15px; color:#fb5f5f;">مرحباً</span>
+        <span class="yc-mono" style="background:#f4f2f6; color:#132340; border-radius:999px; padding:8px 18px; font-size:12px;">● Live in 60 minutes</span>
+      </div>
+      <h2 class="yc-disp" style="font-size:clamp(28px,3.4vw,44px); margin:22px 0 0;"><span data-i18n="box.t1">From box to first sale —</span> <span class="yc-italic" data-i18n="box.t2">before lunch.</span></h2>
+      <p data-i18n="box.sub" style="font-size:18px; color:#5b6579; max-width:860px; margin:16px auto 0;">Real UAE merchants are up and selling inside a lunch break. No integration project. No consultants. No excuses.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr)); gap:22px; margin-top:60px; text-align:left;">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+          <div style="background:{{ s.bg }}; border:1px solid #f4e6dd; border-radius:18px; padding:26px; position:relative;">
+            <div style="position:absolute; top:-18px; left:26px; width:38px; height:38px; border-radius:50%; background:#fb5f5f; color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-weight:700;">{{ s.n }}</div>
+            <div class="yc-mono" style="position:absolute; top:-14px; right:20px; background:#ffe1dc; color:#fb5f5f; border-radius:999px; padding:6px 12px; font-size:11px;">{{ s.min }}</div>
+            <h3 class="yc-disp" style="font-size:20px; margin:22px 0 10px;">{{ s.title }}</h3>
+            <p style="font-size:15.5px; color:#5b6579; margin:0; line-height:1.55;">{{ s.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:56px;">
+        <span class="yc-mono" style="display:inline-block; background:#fb5f5f; color:#fff; border-radius:999px; padding:10px 22px; font-size:12px;">✓ Live in 60 min</span>
+        <div class="yc-disp" style="font-size:clamp(27px,3.2vw,42px); margin-top:18px;"><span class="yc-italic">60 minutes.</span> <span data-i18n="box.not">Not 60 days.</span></div>
+        <p data-i18n="box.foot" style="font-size:16px; color:#5b6579; margin-top:10px;">Average time from box-open to first settled sale, across 200+ UAE pilot merchants.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <div id="how" style="background:#fff5ee; padding:clamp(52px,7vw,96px) clamp(16px,3vw,40px);">
+    <div style="max-width:1320px; margin:0 auto;">
+      <div style="text-align:center;">
+        <span class="yc-mono" style="display:inline-block; background:#ffe1dc; color:#fb5f5f; border-radius:999px; padding:8px 18px; font-size:12px;">● How it works</span>
+        <h2 class="yc-disp" style="font-size:clamp(28px,3.4vw,44px); margin:22px 0 0; line-height:1.22;"><span data-i18n="how.t1">Every till, every kitchen, every</span><br><span data-i18n="how.t2">staff shift — one</span> <span class="yc-italic" data-i18n="how.t3">live picture.</span></h2>
+        <p data-i18n="how.sub" style="font-size:18px; color:#5b6579; margin:16px auto 0;">Seven things every UAE merchant does. All running on the same shared data, from a single app.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr)); gap:clamp(20px,2.4vw,32px); margin-top:56px;">
+        <div style="background:#fff; border-radius:24px; overflow:hidden; box-shadow:0 18px 40px -22px rgba(19,35,64,0.22); display:flex; flex-direction:column;">
+          <div style="position:relative; aspect-ratio:16/9; background:#f4ece6;">
+            <img src="assets/sol-cafe.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+            <div style="position:absolute; top:0; left:0; background:#fff; padding:0 12px 12px 0; border-bottom-right-radius:22px;">
+              <div style="background:#ffe1dc; color:#fb5f5f; border-radius:14px; padding:8px 18px; font-family:'Poppins',sans-serif; font-weight:700; font-size:26px; line-height:1.1;">01</div>
+            </div>
+          </div>
+          <div style="padding:24px 24px 30px;">
+            <div class="yc-mono" style="font-size:11px; color:#fb5f5f;">Bill on the floor</div>
+            <h3 class="yc-disp" style="font-size:21px; line-height:1.3; margin:14px 0 12px; text-wrap:pretty;"><span data-i18n="f1.t">Scan, bill, take payment —</span> <span class="yc-italic" data-i18n="f1.ti">on one device.</span></h3>
+            <p data-i18n="f1.p1" style="font-size:15px; color:#5b6579; line-height:1.6; margin:0; text-wrap:pretty;">Every till runs POS and payment together. The same terminal that scans the barcode also settles the card, prints the receipt, and drops the sale into your books.</p>
+          </div>
+        </div>
+        <div style="background:#fff; border-radius:24px; overflow:hidden; box-shadow:0 18px 40px -22px rgba(19,35,64,0.22); display:flex; flex-direction:column;">
+          <div style="position:relative; aspect-ratio:16/9; background:#f4ece6;">
+            <img src="assets/sol-warehouse.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+            <div style="position:absolute; top:0; left:0; background:#fff; padding:0 12px 12px 0; border-bottom-right-radius:22px;">
+              <div style="background:#ffe1dc; color:#fb5f5f; border-radius:14px; padding:8px 18px; font-family:'Poppins',sans-serif; font-weight:700; font-size:26px; line-height:1.1;">02</div>
+            </div>
+          </div>
+          <div style="padding:24px 24px 30px;">
+            <div class="yc-mono" style="font-size:11px; color:#fb5f5f;">Inventory</div>
+            <h3 class="yc-disp" style="font-size:21px; line-height:1.3; margin:14px 0 12px; text-wrap:pretty;"><span data-i18n="f3.t">Stock that stays right across</span> <span class="yc-italic" data-i18n="f3.ti">every outlet.</span></h3>
+            <p data-i18n="f3.p1" style="font-size:15px; color:#5b6579; line-height:1.6; margin:0; text-wrap:pretty;">Stock decrements the instant it sells — anywhere, on any channel. Snap a supplier invoice and our OCR keys it into the ledger. Low-stock alerts, inter-store transfers, batch and expiry tracking.</p>
+          </div>
+        </div>
+        <div style="background:#fff; border-radius:24px; overflow:hidden; box-shadow:0 18px 40px -22px rgba(19,35,64,0.22); display:flex; flex-direction:column;">
+          <div style="position:relative; aspect-ratio:16/9; background:#f4ece6;">
+            <img src="assets/salon.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+            <div style="position:absolute; top:0; left:0; background:#fff; padding:0 12px 12px 0; border-bottom-right-radius:22px;">
+              <div style="background:#ffe1dc; color:#fb5f5f; border-radius:14px; padding:8px 18px; font-family:'Poppins',sans-serif; font-weight:700; font-size:26px; line-height:1.1;">03</div>
+            </div>
+          </div>
+          <div style="padding:24px 24px 30px;">
+            <div class="yc-mono" style="font-size:11px; color:#fb5f5f;">Loyalty &amp; messaging</div>
+            <h3 class="yc-disp" style="font-size:21px; line-height:1.3; margin:14px 0 12px; text-wrap:pretty;"><span data-i18n="f4.t">Customers who come back</span> <span class="yc-italic" data-i18n="f4.ti">on purpose.</span></h3>
+            <p data-i18n="f4.p1" style="font-size:15px; color:#5b6579; line-height:1.6; margin:0; text-wrap:pretty;">Every card sale, every QR scan writes to the same customer graph. Segment by spend, frequency, and product mix. Fire SMS and email offers — the way UAE actually shops.</p>
+          </div>
+        </div>
+        <div style="background:#fff; border-radius:24px; overflow:hidden; box-shadow:0 18px 40px -22px rgba(19,35,64,0.22); display:flex; flex-direction:column;">
+          <div style="position:relative; aspect-ratio:16/9; background:#f4ece6;">
+            <img src="assets/form-kit.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+            <div style="position:absolute; top:0; left:0; background:#fff; padding:0 12px 12px 0; border-bottom-right-radius:22px;">
+              <div style="background:#ffe1dc; color:#fb5f5f; border-radius:14px; padding:8px 18px; font-family:'Poppins',sans-serif; font-weight:700; font-size:26px; line-height:1.1;">04</div>
+            </div>
+          </div>
+          <div style="padding:24px 24px 30px;">
+            <div class="yc-mono" style="font-size:11px; color:#fb5f5f;">Settlement &amp; recon</div>
+            <h3 class="yc-disp" style="font-size:21px; line-height:1.3; margin:14px 0 12px; text-wrap:pretty;"><span data-i18n="f5.t">The number in the dashboard is</span> <span class="yc-italic" data-i18n="f5.ti">the number in the bank.</span></h3>
+            <p data-i18n="f5.p1" style="font-size:15px; color:#5b6579; line-height:1.6; margin:0; text-wrap:pretty;">Because youcloud acquires the card and rings the sale, both events post to the same ledger. Same-day settlement (T+0) to your Emirates NBD, FAB, ADCB or Mashreq operating account.</p>
+          </div>
+        </div>
+        <div style="background:#fff; border-radius:24px; overflow:hidden; box-shadow:0 18px 40px -22px rgba(19,35,64,0.22); display:flex; flex-direction:column;">
+          <div style="position:relative; aspect-ratio:16/9; background:#f4ece6;">
+            <img src="assets/enterprise-hero.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+            <div style="position:absolute; top:0; left:0; background:#fff; padding:0 12px 12px 0; border-bottom-right-radius:22px;">
+              <div style="background:#ffe1dc; color:#fb5f5f; border-radius:14px; padding:8px 18px; font-family:'Poppins',sans-serif; font-weight:700; font-size:26px; line-height:1.1;">05</div>
+            </div>
+          </div>
+          <div style="padding:24px 24px 30px;">
+            <div class="yc-mono" style="font-size:11px; color:#fb5f5f;">Integrated back-office</div>
+            <h3 class="yc-disp" style="font-size:21px; line-height:1.3; margin:14px 0 12px; text-wrap:pretty;"><span data-i18n="f6.t">HR, bookkeeping and marketing —</span> <span class="yc-italic" data-i18n="f6.ti">wired into every sale.</span></h3>
+            <p data-i18n="f6.p1" style="font-size:15px; color:#5b6579; line-height:1.6; margin:0; text-wrap:pretty;">The back-office isn't a separate stack you sync overnight. Payroll runs on the shift data your POS logged. Every sale auto-posts to your books, FTA-ready. Campaign segments read from live transactions.</p>
+          </div>
+        </div>
+        <div style="background:#fff; border-radius:24px; overflow:hidden; box-shadow:0 18px 40px -22px rgba(19,35,64,0.22); display:flex; flex-direction:column;">
+          <div style="position:relative; aspect-ratio:16/9; background:#f4ece6;">
+            <img src="assets/sol-kitchen.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+            <div style="position:absolute; top:0; left:0; background:#fff; padding:0 12px 12px 0; border-bottom-right-radius:22px;">
+              <div style="background:#ffe1dc; color:#fb5f5f; border-radius:14px; padding:8px 18px; font-family:'Poppins',sans-serif; font-weight:700; font-size:26px; line-height:1.1;">06</div>
+            </div>
+          </div>
+          <div style="padding:24px 24px 30px;">
+            <div class="yc-mono" style="font-size:11px; color:#fb5f5f;">AI-native support</div>
+            <h3 class="yc-disp" style="font-size:21px; line-height:1.3; margin:14px 0 12px; text-wrap:pretty;"><span data-i18n="f7.t">An AI that knows your business —</span> <span class="yc-italic" data-i18n="f7.ti">because it's your data.</span></h3>
+            <p data-i18n="f7.p1" style="font-size:15px; color:#5b6579; line-height:1.6; margin:0; text-wrap:pretty;">Because every event lives on one shared graph, insights aren't a report you download. Store cameras see what's happening on the floor. Automations act on live signals. Forecasts train on your own transactions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PAYMENTS ================= -->
+  <div id="payments" style="position:relative; background:#071427; overflow:hidden; padding:clamp(56px,7vw,96px) clamp(16px,3vw,40px);">
+    <img src="https://youcloud.vercel.app/img/home-soundbox.jpg" alt="" style="position:absolute; top:0; right:0; width:60%; height:100%; object-fit:cover; opacity:0.22; -webkit-mask-image:linear-gradient(90deg,transparent,#000 45%); mask-image:linear-gradient(90deg,transparent,#000 45%);">
+    <div style="position:relative; max-width:1320px; margin:0 auto;">
+      <span class="yc-mono" style="display:inline-flex; align-items:center; gap:8px; background:#fff; color:#fb5f5f; border-radius:999px; padding:8px 16px; font-size:11px;">● <span data-i18n="pay.kicker">Payments · Accept every tender</span></span>
+      <h2 class="yc-disp" style="font-size:clamp(30px,3.8vw,50px); color:#fff; margin:22px 0 0; line-height:1.22; max-width:760px;"><span data-i18n="f2.t">Cash. Card. Wallet. QR. Pay-by-Link.</span><br><span class="yc-italic" data-i18n="f2.ti">Even split bills.</span></h2>
+      <p data-i18n="f2.p1" style="font-size:17px; color:rgba(255,255,255,0.8); line-height:1.6; max-width:640px; margin:20px 0 0;">Every tender your customer wants to use — cash, chip &amp; PIN, contactless card, Apple Pay / Samsung Pay / Google Pay, credit, Emirates domestic QR, Pay-by-Link for remote orders — all on the same terminal, all on one reconciliation.</p>
+      <p style="font-size:17px; color:rgba(255,255,255,0.8); line-height:1.6; max-width:640px; margin:12px 0 0;"><b data-i18n="f2.p2b" style="color:#fff;">Split a bill 4 ways?</b> <span data-i18n="f2.p2">One tap. Two cards + cash + QR? One receipt. No manual maths, no confused waiter.</span></p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); margin-top:44px; background:linear-gradient(180deg,rgba(24,52,110,0.55),rgba(10,24,52,0.55)); border:1px solid rgba(255,255,255,0.14); border-radius:22px; backdrop-filter:blur(6px); overflow:hidden;">
+          <div style="padding:clamp(22px,2.4vw,32px); border-right:1px solid rgba(255,255,255,0.08);">
+            <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(30px,3vw,40px); color:#fff;">7</div>
+            <div class="yc-mono" data-i18n="pay.l1" style="font-size:11px; color:rgba(255,255,255,0.85); margin-top:12px;">Tenders</div>
+            <p data-i18n="pay.b1" style="font-size:14.5px; color:rgba(255,255,255,0.72); line-height:1.55; margin:8px 0 0;">Cash, card, Apple / Samsung / Google Pay, credit, Emirates QR and Pay-by-Link.</p>
+          </div>
+          <div style="padding:clamp(22px,2.4vw,32px); border-right:1px solid rgba(255,255,255,0.08);">
+            <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(30px,3vw,40px); color:#fff;">Any</div>
+            <div class="yc-mono" data-i18n="pay.l2" style="font-size:11px; color:rgba(255,255,255,0.85); margin-top:12px;">Split ways</div>
+            <p data-i18n="pay.b2" style="font-size:14.5px; color:rgba(255,255,255,0.72); line-height:1.55; margin:8px 0 0;">Two cards + cash + QR on one bill. One receipt.</p>
+          </div>
+          <div style="padding:clamp(22px,2.4vw,32px); border-right:1px solid rgba(255,255,255,0.08);">
+            <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(30px,3vw,40px); color:#fff;">Auto</div>
+            <div class="yc-mono" data-i18n="pay.l3" style="font-size:11px; color:rgba(255,255,255,0.85); margin-top:12px;">Recon</div>
+            <p data-i18n="pay.b3" style="font-size:14.5px; color:rgba(255,255,255,0.72); line-height:1.55; margin:8px 0 0;">Every tender lands on one reconciliation.</p>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= LENDING ================= -->
+  <div id="lending" style="background:linear-gradient(120deg,#0b1b3a 0%,#1b3160 100%); padding:clamp(40px,5vw,72px) clamp(16px,3vw,40px);">
+    <div style="max-width:1320px; margin:0 auto; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:28px; padding:clamp(24px,3.4vw,48px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr)); gap:clamp(28px,4vw,56px); align-items:center;">
+      <div>
+        <span class="yc-mono" style="display:inline-flex; align-items:center; gap:8px; background:#fff; color:#fb5f5f; border-radius:999px; padding:8px 16px; font-size:11px;">● <span data-i18n="lend.kicker">youLend · Working capital</span></span>
+        <h2 class="yc-disp" style="font-size:clamp(30px,3.6vw,46px); color:#fff; margin:22px 0 0; line-height:1.22;"><span data-i18n="lend.t">Working capital,</span><br><span class="yc-italic" data-i18n="lend.ti">already pre-approved.</span></h2>
+        <p data-i18n="lend.p1" style="font-size:17px; color:rgba(255,255,255,0.8); line-height:1.6; margin:20px 0 0; max-width:540px;">Every card sale and every QR scan adds to your merchant credit profile. When you need stock for Ramadan, Eid or a second branch, the loan is already sized, priced in AED and pre-approved — right there in your dashboard.</p>
+        <p data-i18n="lend.p2" style="font-size:17px; color:rgba(255,255,255,0.8); line-height:1.6; margin:12px 0 0; max-width:540px;">Repaid as a share of your daily T+0 settlement to your UAE IBAN. Revenue-share, no monthly fee.</p>
+        <button onClick="{{ openForm }}" style="margin-top:28px; background:#fb5f5f; color:#fff; border:none; border-radius:12px; padding:16px 26px; font-family:'Poppins',sans-serif; font-size:16px; font-weight:600; cursor:pointer;"><span data-i18n="lend.cta">Check my offer</span> →</button>
+      </div>
+      <div style="background:#fff; border-radius:22px; overflow:hidden; aspect-ratio:16/10;">
+        <img src="https://youcloud.vercel.app/img/home-a-lend.jpg" alt="Merchant receiving a youLend loan" style="width:100%; height:100%; object-fit:cover; display:block;">
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= HARDWARE ================= -->
+  <div id="hardware" style="background:linear-gradient(150deg,#0e1c33 0%,#141c38 55%,#2a1c3a 100%); padding:clamp(52px,7vw,96px) clamp(16px,3vw,40px);">
+    <div style="max-width:1440px; margin:0 auto;">
+      <span class="yc-mono" style="display:inline-block; background:rgba(255,255,255,0.08); color:#fff; border-radius:999px; padding:8px 18px; font-size:12px;">● Hardware</span>
+      <h2 class="yc-disp" style="font-size:clamp(27px,3.2vw,42px); color:#fff; margin:22px 0 0;"><span data-i18n="hw.t">Kits arrive charged, activated,</span> <span class="yc-italic" data-i18n="hw.ti">and ready to sell.</span></h2>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap;">
+        <p data-i18n="hw.sub" style="font-size:17px; color:rgba(255,255,255,0.72); max-width:660px; margin:16px 0 0;">From a phone + Bluetooth printer starter kit to a dual-screen counter. Every device runs youcloud natively. Ships next-day across the UAE.</p>
+        <span class="yc-mono" style="background:#fb5f5f; color:#fff; border-radius:999px; padding:8px 16px; font-size:11px;">Most popular</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,224px),1fr)); gap:18px; margin-top:44px;">
+          <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:22px; display:flex; flex-direction:column;">
+            <div style="height:150px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; background:#fff; border-radius:14px; padding:10px;"><img src="assets/pos-handheld.png" alt="" style="max-height:150px; max-width:100%; object-fit:contain;"></div>
+            <div class="yc-disp" style="font-size:22px; color:#fff;">y1000</div>
+            <div style="margin-top:8px;"><span class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.6);">AED</span> <b class="yc-disp" style="font-size:20px; color:#fff;">699</b> <span class="yc-mono" style="font-size:11px; color:rgba(255,255,255,0.6);">one-time</span></div>
+            <p style="font-size:14.5px; color:rgba(255,255,255,0.72); line-height:1.5; margin:12px 0 16px;">Rugged all-in-one handheld. Scan, bill, take payment, print — one device.</p>
+            <div style="border-top:1px solid rgba(255,255,255,0.12); margin-top:auto;">
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Display</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">6.5" HD+ touch</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Scanner</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">Built-in 2D</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Card</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">NFC + EMV</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Best for</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">Floor billing</span>
+                </div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:22px; display:flex; flex-direction:column;">
+            <div style="height:150px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; background:#fff; border-radius:14px; padding:10px;"><img src="assets/kit-y4000.png" alt="" style="max-height:150px; max-width:100%; object-fit:contain;"></div>
+            <div class="yc-disp" style="font-size:22px; color:#fff;">y4000</div>
+            <div style="margin-top:8px;"><span class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.6);">AED</span> <b class="yc-disp" style="font-size:20px; color:#fff;">1,099</b> <span class="yc-mono" style="font-size:11px; color:rgba(255,255,255,0.6);">one-time</span></div>
+            <p style="font-size:14.5px; color:rgba(255,255,255,0.72); line-height:1.5; margin:12px 0 16px;">10" tablet POS on a stand. Table-side ordering for restaurants & cafes. Splash-proof.</p>
+            <div style="border-top:1px solid rgba(255,255,255,0.12); margin-top:auto;">
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Display</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">10" HD+ touch</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Scanner</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">Built-in barcode</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Card</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">NFC + EMV</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Best for</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">Restaurants & F&B</span>
+                </div>
+            </div>
+          </div>
+          <div style="background:rgba(251,95,95,0.07); border:1px solid rgba(251,95,95,0.5); border-radius:18px; padding:22px; display:flex; flex-direction:column;">
+            <div style="height:150px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; background:#fff; border-radius:14px; padding:10px;"><img src="assets/kit-y5000.png" alt="" style="max-height:150px; max-width:100%; object-fit:contain; border-radius:10px;"></div>
+            <div class="yc-disp" style="font-size:22px; color:#fff;">y5000</div>
+            <div style="margin-top:8px;"><span class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.6);">AED</span> <b class="yc-disp" style="font-size:20px; color:#fff;">1,999</b> <span class="yc-mono" style="font-size:11px; color:rgba(255,255,255,0.6);">one-time</span></div>
+            <p style="font-size:14.5px; color:rgba(255,255,255,0.72); line-height:1.5; margin:12px 0 16px;">Dual-screen counter POS. Staff-side flow, customer-facing payment.</p>
+            <div style="border-top:1px solid rgba(255,255,255,0.12); margin-top:auto;">
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Display</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">Dual 15.6" touch</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Split</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">Staff + customer</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Printer</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">80 mm built-in</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Best for</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">Busy counters</span>
+                </div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:22px; display:flex; flex-direction:column;">
+            <div style="height:150px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; background:#fff; border-radius:14px; padding:10px;"><img src="assets/kit-y7000.png" alt="" style="max-height:150px; max-width:100%; object-fit:contain;"></div>
+            <div class="yc-disp" style="font-size:22px; color:#fff;">y7000</div>
+            <div style="margin-top:8px;"><span class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.6);">AED</span> <b class="yc-disp" style="font-size:20px; color:#fff;">1,829</b> <span class="yc-mono" style="font-size:11px; color:rgba(255,255,255,0.6);">one-time</span></div>
+            <p style="font-size:14.5px; color:rgba(255,255,255,0.72); line-height:1.5; margin:12px 0 16px;">27-inch upright kiosk. Guests order, pay and earn loyalty themselves.</p>
+            <div style="border-top:1px solid rgba(255,255,255,0.12); margin-top:auto;">
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Display</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">27" upright touch</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Payments</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">Card · QR · NFC</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Modes</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">Retail · pickup</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Best for</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">Self-checkout</span>
+                </div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:22px; display:flex; flex-direction:column;">
+            <div style="height:150px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; background:#fff; border-radius:14px; padding:10px;"><img src="assets/kit-y10.png" alt="" style="max-height:150px; max-width:100%; object-fit:contain;"></div>
+            <div class="yc-disp" style="font-size:22px; color:#fff;">y10 SoundBox</div>
+            <div style="margin-top:8px;"><span class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.6);">AED</span> <b class="yc-disp" style="font-size:20px; color:#fff;">699</b> <span class="yc-mono" style="font-size:11px; color:rgba(255,255,255,0.6);">one-time</span></div>
+            <p style="font-size:14.5px; color:rgba(255,255,255,0.72); line-height:1.5; margin:12px 0 16px;">105dB audio confirmation the moment the money lands. Never chase a customer again.</p>
+            <div style="border-top:1px solid rgba(255,255,255,0.12); margin-top:auto;">
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Volume</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">105 dB speaker</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Confirm</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">< 3 seconds</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Connect</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">4G + Wi-Fi</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; gap:8px; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="font-size:13.5px; color:rgba(255,255,255,0.62);">Best for</span>
+                  <span style="font-size:13.5px; color:#fff; font-weight:600; text-align:right;">Busy tills · QR</span>
+                </div>
+            </div>
+          </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.14); margin-top:40px; padding-top:26px; display:flex; flex-wrap:wrap; gap:14px 34px;">
+        <span class="yc-mono" style="font-size:13px; color:rgba(255,255,255,0.75); text-transform:none; letter-spacing:0.04em; white-space:nowrap;"><span style="color:#fb5f5f;">✓</span> <b style="color:#fff;">Next-day</b> UAE delivery</span>
+        <span class="yc-mono" style="font-size:13px; color:rgba(255,255,255,0.75); text-transform:none; letter-spacing:0.04em; white-space:nowrap;"><span style="color:#fb5f5f;">✓</span> <b style="color:#fff;">Pre-activated</b> — just log in</span>
+        <span class="yc-mono" style="font-size:13px; color:rgba(255,255,255,0.75); text-transform:none; letter-spacing:0.04em; white-space:nowrap;"><span style="color:#fb5f5f;">✓</span> <b style="color:#fff;">PCI PTS 5.x</b> SRED</span>
+        <span class="yc-mono" style="font-size:13px; color:rgba(255,255,255,0.75); text-transform:none; letter-spacing:0.04em; white-space:nowrap;"><span style="color:#fb5f5f;">✓</span> <b style="color:#fff;">EMV L1 + L2</b></span>
+        <span class="yc-mono" style="font-size:13px; color:rgba(255,255,255,0.75); text-transform:none; letter-spacing:0.04em; white-space:nowrap;"><span style="color:#fb5f5f;">✓</span> <b style="color:#fff;">OTA</b> fleet-managed</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= BUILT FOR THE UAE ================= -->
+  <div id="solutions" style="background:#fff; padding:clamp(52px,7vw,96px) clamp(16px,3vw,40px);">
+    <div style="max-width:1440px; margin:0 auto;">
+      <span class="yc-mono" style="display:inline-block; background:#ffe1dc; color:#fb5f5f; border-radius:999px; padding:8px 18px; font-size:12px;">● Built for the UAE</span>
+      <h2 class="yc-disp" style="font-size:clamp(27px,3.2vw,42px); margin:22px 0 0; line-height:1.22;"><span data-i18n="uae.t1">From the corner shop in Karama</span><br><span data-i18n="uae.t2">to the salon in</span> <span class="yc-italic" data-i18n="uae.t3">the Marina.</span></h2>
+      <p data-i18n="uae.sub" style="font-size:17px; color:#5b6579; max-width:900px; margin:16px 0 0; line-height:1.6;">Retail, F&amp;B, and services — same one app, different templates. Multi-outlet chains and franchises get central control on top.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:24px; margin-top:44px;">
+        <div style="background:#fffaf6; border:1px solid #f4e6dd; border-radius:20px; overflow:hidden;">
+          <div style="position:relative; height:210px;">
+            <img src="assets/retail-hero.png" alt="" style="width:100%; height:100%; object-fit:cover;">
+            <span class="yc-mono" style="position:absolute; top:16px; left:16px; background:#fff; border-radius:999px; padding:7px 14px; font-size:11px;">Retail</span>
+          </div>
+          <div style="padding:24px;">
+            <h3 class="yc-disp" style="font-size:22px; margin:0 0 10px;" data-i18n="uae.c1t">Retail shops</h3>
+            <p data-i18n="uae.c1b" style="font-size:15.5px; color:#5b6579; line-height:1.55; margin:0 0 18px;">Groceries, dates &amp; sweets, textiles, electronics, pharmacies. Barcode billing, stock across branches, loyalty on your phone.</p>
+            <div style="border-top:1px solid #f1e6de; padding-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+              <span class="yc-mono" style="background:#fff3ec; border-radius:999px; padding:6px 12px; font-size:11px; color:#6c7687; text-transform:none;">Grocery</span>
+              <span class="yc-mono" style="background:#fff3ec; border-radius:999px; padding:6px 12px; font-size:11px; color:#6c7687; text-transform:none;">Dates &amp; sweets</span>
+              <span class="yc-mono" style="background:#fff3ec; border-radius:999px; padding:6px 12px; font-size:11px; color:#6c7687; text-transform:none;">Textile</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:#fffaf6; border:1px solid #f4e6dd; border-radius:20px; overflow:hidden;">
+          <div style="height:210px; background:#fff7f2; padding:18px;">
+            <span class="yc-mono" style="font-size:11px; color:#6c7687;">F&amp;B</span>
+            <div style="background:#fff; border-radius:12px; padding:14px; margin-top:10px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <b style="font-size:15px;">Kitchen · all channels</b>
+                <span class="yc-mono" style="font-size:10px; color:#17a673;">● LIVE</span>
+              </div>
+              <sc-for list="{{ kds }}" as="o" hint-placeholder-count="4">
+                <div style="display:flex; align-items:center; gap:8px; margin-top:8px; background:{{ o.bg }}; border-radius:8px; padding:7px 9px;">
+                  <span class="yc-mono" style="font-size:9px; background:{{ o.tagBg }}; color:{{ o.tagFg }}; border-radius:5px; padding:3px 5px;">{{ o.src }}</span>
+                  <span style="flex:1; font-size:13px;">{{ o.item }}</span>
+                  <span class="yc-mono" style="font-size:11px; color:#8b93a4;">{{ o.time }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:24px;">
+            <h3 class="yc-disp" style="font-size:22px; margin:0 0 10px;" data-i18n="uae.c2t">Restaurants &amp; cafes</h3>
+            <p data-i18n="uae.c2b" style="font-size:15.5px; color:#5b6579; line-height:1.55; margin:0 0 18px;">Table POS, KDS, Talabat &amp; Careem aggregator sync, direct delivery, online reservations. Tips pooled, staff paid.</p>
+            <div style="border-top:1px solid #f1e6de; padding-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+              <span class="yc-mono" style="background:#fff3ec; border-radius:999px; padding:6px 12px; font-size:11px; color:#6c7687; text-transform:none;">Casual dining</span>
+              <span class="yc-mono" style="background:#fff3ec; border-radius:999px; padding:6px 12px; font-size:11px; color:#6c7687; text-transform:none;">Cafes</span>
+              <span class="yc-mono" style="background:#fff3ec; border-radius:999px; padding:6px 12px; font-size:11px; color:#6c7687; text-transform:none;">Cloud kitchen</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:#fffaf6; border:1px solid #f4e6dd; border-radius:20px; overflow:hidden;">
+          <div style="position:relative; height:210px;">
+            <img src="assets/salon.png" alt="" style="width:100%; height:100%; object-fit:cover;">
+            <span class="yc-mono" style="position:absolute; top:16px; left:16px; background:#fff; border-radius:999px; padding:7px 14px; font-size:11px;">Services</span>
+          </div>
+          <div style="padding:24px;">
+            <h3 class="yc-disp" style="font-size:22px; margin:0 0 10px;" data-i18n="uae.c3t">Salons &amp; services</h3>
+            <p data-i18n="uae.c3b" style="font-size:15.5px; color:#5b6579; line-height:1.55; margin:0 0 18px;">Bookings, chair-side flow, staff commission, product retail, SMS reminders. Karama to City Walk, one system.</p>
+            <div style="border-top:1px solid #f1e6de; padding-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+              <span class="yc-mono" style="background:#fff3ec; border-radius:999px; padding:6px 12px; font-size:11px; color:#6c7687; text-transform:none;">Salons</span>
+              <span class="yc-mono" style="background:#fff3ec; border-radius:999px; padding:6px 12px; font-size:11px; color:#6c7687; text-transform:none;">Clinics</span>
+              <span class="yc-mono" style="background:#fff3ec; border-radius:999px; padding:6px 12px; font-size:11px; color:#6c7687; text-transform:none;">Spa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#fffaf6; border:1px solid #f4e6dd; border-radius:20px; margin-top:24px; overflow:hidden; max-width:min(100%,900px);">
+        <div style="background:#132340; padding:26px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <b style="color:#fff; font-size:17px;" data-i18n="uae.map">All UAE outlets</b>
+            <span class="yc-mono" style="font-size:12px; color:#fb5f5f;">42 LIVE</span>
+          </div>
+          <div style="position:relative; height:240px; margin-top:18px; border:1px solid rgba(255,255,255,0.08); border-radius:12px; background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px); background-size:48px 48px;">
+            <sc-for list="{{ pins }}" as="p" hint-placeholder-count="8">
+              <div style="position:absolute; left:{{ p.x }}; top:{{ p.y }}; transform:translate(-50%,-50%); text-align:center;">
+                <div class="yc-mono" style="font-size:11px; color:#fff; text-transform:none; margin-bottom:6px;">{{ p.name }}</div>
+                <div style="width:{{ p.s }}; height:{{ p.s }}; border-radius:50%; background:#fb5f5f; border:2px solid #fff; margin:0 auto;"></div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:18px;">
+            <div style="background:rgba(255,255,255,0.06); border-radius:10px; padding:14px;"><div class="yc-mono" style="font-size:10px; color:rgba(255,255,255,0.55);">Group today</div><div style="margin-top:4px;"><span class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.6);">AED</span> <b class="yc-disp" style="font-size:20px; color:#fff;">487k</b></div></div>
+            <div style="background:rgba(255,255,255,0.06); border-radius:10px; padding:14px;"><div class="yc-mono" style="font-size:10px; color:rgba(255,255,255,0.55);">Outlets</div><div class="yc-disp" style="font-size:20px; color:#fff; margin-top:4px;">42</div></div>
+            <div style="background:rgba(255,255,255,0.06); border-radius:10px; padding:14px;"><div class="yc-mono" style="font-size:10px; color:rgba(255,255,255,0.55);">Synced</div><div class="yc-disp" style="font-size:20px; color:#3ecf8e; margin-top:4px;">100%</div></div>
+          </div>
+        </div>
+        <div style="padding:26px;">
+          <h3 class="yc-disp" style="font-size:22px; margin:0 0 10px;" data-i18n="uae.c4t">Chains &amp; franchises</h3>
+          <p data-i18n="uae.c4b" style="font-size:15.5px; color:#5b6579; line-height:1.55; margin:0 0 18px;">One KDS view across every outlet and aggregator, one central menu, one settlement — with franchise governance built in.</p>
+          <div style="border-top:1px solid #f1e6de; padding-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+            <span class="yc-mono" style="background:#fff3ec; border-radius:999px; padding:6px 12px; font-size:11px; color:#6c7687; text-transform:none;">QSR chain</span>
+            <span class="yc-mono" style="background:#fff3ec; border-radius:999px; padding:6px 12px; font-size:11px; color:#6c7687; text-transform:none;">Retail chain</span>
+            <span class="yc-mono" style="background:#fff3ec; border-radius:999px; padding:6px 12px; font-size:11px; color:#6c7687; text-transform:none;">Franchise</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= COMPARE ================= -->
+  <div style="background:#fff5ee; padding:clamp(52px,7vw,96px) clamp(16px,3vw,40px);">
+    <div style="max-width:1400px; margin:0 auto;">
+      <div style="text-align:center;">
+        <span class="yc-mono" style="display:inline-block; background:#ffe1dc; color:#fb5f5f; border-radius:999px; padding:8px 18px; font-size:12px;">● Compare</span>
+        <h2 class="yc-disp" style="font-size:clamp(27px,3.2vw,42px); margin:22px 0 0;"><span data-i18n="cmp.t">Same UAE market.</span> <span class="yc-italic" data-i18n="cmp.ti">Very different app.</span></h2>
+        <p data-i18n="cmp.sub" style="font-size:17px; color:#5b6579; max-width:760px; margin:16px auto 0;">The big local players do payments well — but the POS, HR, books, marketing and AI? That's still eight vendors.</p>
+      </div>
+      <div style="background:#fff; border-radius:20px; margin-top:44px; overflow:hidden;">
+        <div style="display:grid; grid-template-columns:minmax(150px,1.5fr) repeat(3,minmax(74px,1fr)); align-items:stretch;">
+          <div style="padding:22px 24px;"><span class="yc-mono" style="font-size:11px; color:#8b93a4;">What you get</span></div>
+          <div style="background:#132340; padding:22px 24px; text-align:center;"><span class="yc-disp" style="font-size:18px; color:#fff;">you<span style="color:#fb5f5f;">cloud</span></span></div>
+          <div style="padding:22px 24px; text-align:center;"><b style="font-size:17px;">Geidea</b></div>
+          <div style="padding:22px 24px; text-align:center;"><b style="font-size:17px;">Network Int'l</b></div>
+        </div>
+        <sc-for list="{{ compare }}" as="c" hint-placeholder-count="10">
+          <div style="display:grid; grid-template-columns:minmax(150px,1.5fr) repeat(3,minmax(74px,1fr)); border-top:1px solid #f4efe9; align-items:center;">
+            <div style="padding:18px 24px;"><b style="font-size:15.5px; display:block;">{{ c.feat }}</b><span class="yc-mono" style="font-size:11px; color:#8b93a4; text-transform:none;">{{ c.sub }}</span></div>
+            <div style="padding:18px 24px; text-align:center; background:#fff5f2;"><b style="font-size:15.5px; color:#e8484f;">✓ {{ c.yc }}</b></div>
+            <div style="padding:18px 24px; text-align:center; font-size:15.5px; color:{{ c.aFg }};">{{ c.a }}</div>
+            <div style="padding:18px 24px; text-align:center; font-size:15.5px; color:{{ c.bFg }};">{{ c.b }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <p class="yc-mono" data-i18n="cmp.foot" style="font-size:12px; color:#8b93a4; text-align:center; max-width:840px; margin:28px auto 0; text-transform:none; line-height:1.7;">Comparison based on publicly available product info as of Sep 2026. Geidea and Network International are trademarks of their respective owners — used for comparative reference only.</p>
+    </div>
+  </div>
+
+  <!-- ================= PRICING ================= -->
+  <div id="pricing" style="background:#fff; padding:clamp(52px,7vw,96px) clamp(16px,3vw,40px);">
+    <div style="max-width:1400px; margin:0 auto;">
+      <div style="text-align:center;">
+        <span class="yc-mono" style="display:inline-block; background:#ffe1dc; color:#fb5f5f; border-radius:999px; padding:8px 18px; font-size:12px;">● Pricing · UAE</span>
+        <h2 class="yc-disp" style="font-size:clamp(27px,3.2vw,42px); margin:22px 0 0;"><span data-i18n="pr.t">All in. In AED.</span> <span class="yc-italic" data-i18n="pr.ti">No surprises.</span></h2>
+        <p data-i18n="pr.sub" style="font-size:17px; color:#5b6579; max-width:760px; margin:16px auto 0;">Software is priced per POS, per month. Payments are quoted per scheme &amp; volume. All tiers annual — no re-integration when you move up.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:26px; margin-top:52px; align-items:start;">
+        <div style="background:#fff; border:1px solid #efe3da; border-radius:20px; padding:30px;">
+          <span class="yc-mono" style="font-size:11px; color:#8b93a4;">Standard</span>
+          <h3 class="yc-disp" style="font-size:28px; margin:12px 0 8px;">Standard</h3>
+          <p data-i18n="pr.s1" style="font-size:16px; color:#5b6579; margin:0 0 20px; line-height:1.5;">For a growing shop, cafe or salon ready to consolidate onto one system.</p>
+          <div><span class="yc-mono" style="font-size:15px; color:#8b93a4;">AED</span> <b class="yc-disp" style="font-size:clamp(27px,3.2vw,42px);">19</b><span class="yc-mono" style="font-size:13px; color:#6c7687;">/POS/mo</span></div>
+          <div class="yc-mono" style="font-size:12px; color:#8b93a4; margin-top:6px; text-transform:none;">billed annually · 3–8 outlets</div>
+          <div style="background:#fff5ee; border-radius:12px; padding:14px; margin-top:18px; font-size:14.5px; color:#5b6579;">3–8 outlets · 5 users · 5,000 SKUs · 5,000 invoices/mo</div>
+          <div class="yc-mono" style="font-size:11px; color:#8b93a4; margin-top:22px;">Core platform</div>
+          <sc-for list="{{ tierStandard }}" as="i" hint-placeholder-count="5">
+            <div style="font-size:16px; color:#3c475d; margin-top:10px;"><span style="color:#fb5f5f;">✓</span> {{ i }}</div>
+          </sc-for>
+          <div class="yc-mono" style="font-size:11px; color:#8b93a4; margin-top:22px; border-top:1px solid #f1e6de; padding-top:18px;">Support</div>
+          <div style="font-size:16px; color:#3c475d; margin-top:10px;"><span style="color:#fb5f5f;">✓</span> Email + chat · 24-hr SLA</div>
+          <button onClick="{{ openForm }}" data-i18n="pr.book" style="width:100%; margin-top:26px; background:#fff; border:1px solid #e6dcd3; border-radius:12px; padding:16px; font-family:'Poppins',sans-serif; font-size:16px; font-weight:600; color:#132340; cursor:pointer;" style-hover="background:#fff5ee">Book a demo</button>
+        </div>
+        <div style="background:#132340; border-radius:20px; padding:30px; position:relative;">
+          <span class="yc-mono" style="position:absolute; top:-16px; left:50%; transform:translateX(-50%); background:#fb5f5f; color:#fff; border-radius:999px; padding:8px 18px; font-size:11px;">Most popular</span>
+          <span class="yc-mono" style="font-size:11px; color:#fb5f5f;">Power</span>
+          <h3 class="yc-disp" style="font-size:28px; margin:12px 0 8px; color:#fff;">Power</h3>
+          <p data-i18n="pr.s2" style="font-size:16px; color:rgba(255,255,255,0.75); margin:0 0 20px; line-height:1.5;">For multi-outlet operators running the whole platform — POS + payments + HR + books + marketing + AI.</p>
+          <div><span class="yc-mono" style="font-size:15px; color:rgba(255,255,255,0.6);">AED</span> <b class="yc-disp" style="font-size:clamp(27px,3.2vw,42px); color:#fff;">55</b><span class="yc-mono" style="font-size:13px; color:rgba(255,255,255,0.7);">/POS/mo</span></div>
+          <div class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:6px; text-transform:none;">billed annually · unlimited outlets</div>
+          <div style="background:rgba(255,255,255,0.07); border-radius:12px; padding:14px; margin-top:18px; font-size:14.5px; color:rgba(255,255,255,0.8);">9+ / unlimited outlets · unlimited users · 10,000 SKUs</div>
+          <div class="yc-mono" style="font-size:11px; color:rgba(255,255,255,0.55); margin-top:22px;">Everything in Standard, plus</div>
+          <sc-for list="{{ tierPower }}" as="i" hint-placeholder-count="6">
+            <div style="font-size:16px; color:rgba(255,255,255,0.9); margin-top:10px;"><span style="color:#fb5f5f;">✓</span> {{ i }}</div>
+          </sc-for>
+          <div class="yc-mono" style="font-size:11px; color:rgba(255,255,255,0.55); margin-top:22px; border-top:1px solid rgba(255,255,255,0.12); padding-top:18px;">AI-native</div>
+          <div style="font-size:16px; color:rgba(255,255,255,0.9); margin-top:10px;"><span style="color:#fb5f5f;">✓</span> AI Insights · Workflows · Lens</div>
+          <button onClick="{{ openForm }}" data-i18n="pr.book2" style="width:100%; margin-top:26px; background:#fb5f5f; border:none; border-radius:12px; padding:16px; font-family:'Poppins',sans-serif; font-size:16px; font-weight:600; color:#fff; cursor:pointer;" style-hover="opacity:0.88">Book a demo</button>
+        </div>
+        <div style="background:#fff; border:1px solid #efe3da; border-radius:20px; padding:30px;">
+          <span class="yc-mono" style="font-size:11px; color:#8b93a4;">Enterprise</span>
+          <h3 class="yc-disp" style="font-size:28px; margin:12px 0 8px;">Enterprise</h3>
+          <p data-i18n="pr.s3" style="font-size:16px; color:#5b6579; margin:0 0 20px; line-height:1.5;">For chains, franchises and multi-brand groups with procurement, SSO and 24/7 uptime requirements.</p>
+          <div class="yc-disp" style="font-size:clamp(27px,3.2vw,42px);">Custom</div>
+          <div class="yc-mono" style="font-size:12px; color:#8b93a4; margin-top:6px; text-transform:none;">annual · per procurement</div>
+          <div style="background:#fff5ee; border-radius:12px; padding:14px; margin-top:18px; font-size:14.5px; color:#5b6579;">Unlimited outlets · unlimited SKUs · franchise governance</div>
+          <div class="yc-mono" style="font-size:11px; color:#8b93a4; margin-top:22px;">Everything in Power, plus</div>
+          <sc-for list="{{ tierEnt }}" as="i" hint-placeholder-count="6">
+            <div style="font-size:16px; color:#3c475d; margin-top:10px;"><span style="color:#fb5f5f;">✓</span> {{ i }}</div>
+          </sc-for>
+          <div class="yc-mono" style="font-size:11px; color:#8b93a4; margin-top:22px; border-top:1px solid #f1e6de; padding-top:18px;">Enterprise support</div>
+          <div style="font-size:16px; color:#3c475d; margin-top:10px;"><span style="color:#fb5f5f;">✓</span> 24/7 phone · 1-hr SLA · named CSM</div>
+          <button onClick="{{ openForm }}" data-i18n="pr.contact" style="width:100%; margin-top:26px; background:#132340; border:none; border-radius:12px; padding:16px; font-family:'Poppins',sans-serif; font-size:16px; font-weight:600; color:#fff; cursor:pointer;" style-hover="opacity:0.9">Contact enterprise</button>
+        </div>
+      </div>
+
+      <div style="margin-top:80px;">
+        <span class="yc-mono" style="display:inline-block; background:#f4f2f6; color:#132340; border-radius:999px; padding:8px 18px; font-size:12px;">● Add-ons · optional</span>
+        <div style="display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap; align-items:flex-end;">
+          <h2 class="yc-disp" style="font-size:clamp(25px,2.8vw,36px); margin:20px 0 0;"><span data-i18n="ao.t">Turn on the AI when</span> <span class="yc-italic" data-i18n="ao.ti">you're ready.</span></h2>
+          <p data-i18n="ao.sub" style="font-size:16px; color:#5b6579; max-width:460px; margin:0;">All add-ons run on the same merchant data. Add one this quarter, another next — no re-integration.</p>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:14px 26px; margin-top:30px;">
+          <sc-for list="{{ addons }}" as="a" hint-placeholder-count="8">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; background:#fff; border:1px solid {{ a.bd }}; border-radius:999px; padding:16px 22px;">
+              <span style="display:flex; align-items:center; gap:14px;">
+                <span style="width:30px; height:30px; border-radius:50%; background:#ffdcd6; display:flex; align-items:center; justify-content:center;"><span style="width:9px; height:9px; border-radius:50%; background:#fb5f5f;"></span></span>
+                <b style="font-size:16px;">{{ a.name }}</b>
+              </span>
+              <span class="yc-mono" style="font-size:12px; color:#6c7687; text-transform:none; letter-spacing:0.04em;">{{ a.price }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p class="yc-mono" data-i18n="ao.foot" style="font-size:12.5px; color:#6c7687; margin-top:26px; text-transform:none; letter-spacing:0.03em;"><b>Payments</b> — Visa/Mastercard 1.9–2.4%, Amex 2.9–3.4%, domestic wallets 0.9–1.5%, QR rails 0.5–1.2%. Volume discounts on Power &amp; Enterprise.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FAQ ================= -->
+  <div id="faq" style="background:#fff5ee; padding:clamp(52px,7vw,96px) clamp(16px,3vw,40px);">
+    <div style="max-width:1400px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:clamp(34px,4vw,70px);">
+      <div>
+        <span class="yc-mono" style="display:inline-block; background:#ffe1dc; color:#fb5f5f; border-radius:999px; padding:8px 18px; font-size:12px;">● FAQ · UAE</span>
+        <h2 class="yc-disp" style="font-size:clamp(25px,2.8vw,36px); margin:22px 0 0; line-height:1.22;"><span data-i18n="faq.t">Straight answers</span><br><span style="font-style:italic;" data-i18n="faq.ti">for UAE merchants.</span></h2>
+        <p data-i18n="faq.sub" style="font-size:16px; color:#5b6579; margin:16px 0 30px; line-height:1.6;">Common questions from shop owners, restaurateurs and franchise operators evaluating the platform.</p>
+        <div style="background:#fff; border-radius:18px; padding:26px;">
+          <b data-i18n="faq.talkT" style="font-size:18px; display:block;">Prefer to talk?</b>
+          <p data-i18n="faq.talkB" style="font-size:15.5px; color:#5b6579; line-height:1.55; margin:10px 0 18px;">Call our UAE team directly — English, العربية, हिंदी, or Tagalog. Answered in under 5 minutes during business hours.</p>
+          <button onClick="{{ openForm }}" style="width:100%; background:#fb5f5f; border:none; border-radius:12px; padding:16px; color:#fff; font-family:'Poppins',sans-serif; font-size:16px; font-weight:600; cursor:pointer;" style-hover="opacity:0.88"><span data-i18n="faq.talkCta">Book a 15-min call</span> →</button>
+          <div class="yc-mono" style="font-size:12px; color:#6c7687; margin-top:14px; text-transform:none; letter-spacing:0.04em;">Or email connect@youcloudtech.com</div>
+        </div>
+      </div>
+      <div>
+        <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="7">
+          <div style="border-bottom:1px solid #f0e0d5;">
+            <button onClick="{{ q.toggle }}" style="width:100%; background:none; border:none; padding:24px 0; display:flex; align-items:center; justify-content:space-between; gap:20px; cursor:pointer; text-align:left;">
+              <b style="font-size:18px; color:{{ q.color }}; font-family:'Poppins',sans-serif;">{{ q.q }}</b>
+              <span style="font-size:22px; color:#fb5f5f; flex:none;">{{ q.sign }}</span>
+            </button>
+            <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+              <p style="font-size:16.5px; color:#5b6579; line-height:1.6; margin:0 0 24px; max-width:88%;">{{ q.a }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CTA ================= -->
+  <div id="enterprise" style="background:linear-gradient(140deg,#0e1c33 0%,#141d38 60%,#33203c 100%); padding:clamp(56px,7vw,100px) clamp(16px,3vw,40px); text-align:center;">
+    <div style="font-family:'Noto Kufi Arabic',sans-serif; font-size:17px; color:rgba(255,255,255,0.7);">هل أنت مستعد؟</div>
+    <span class="yc-mono" style="display:inline-block; margin-top:16px; background:rgba(255,255,255,0.08); color:#fff; border-radius:999px; padding:8px 18px; font-size:12px;">● Ready?</span>
+    <h2 class="yc-disp" style="font-size:clamp(34px,4.4vw,56px); color:#fff; margin:24px 0 0; line-height:1.22;">
+      <span data-i18n="cta.t1">One tool.</span><br><span data-i18n="cta.t2">One login.</span><br><span class="yc-italic" data-i18n="cta.t3">One less headache.</span>
+    </h2>
+    <p data-i18n="cta.sub" style="font-size:18px; color:rgba(255,255,255,0.75); max-width:700px; margin:24px auto 0; line-height:1.55;">Book a free 15-minute demo. See it running with your product list, your menu, your outlet. Live in 60 minutes when you're ready.</p>
+    <div style="display:flex; gap:16px; justify-content:center; margin-top:34px; flex-wrap:wrap;">
+      <button onClick="{{ openForm }}" style="background:#fb5f5f; color:#fff; border:none; border-radius:12px; padding:18px 30px; font-family:'Poppins',sans-serif; font-size:17px; font-weight:600; cursor:pointer;" style-hover="opacity:0.88"><span data-i18n="cta.b1">Book a free 15-min demo</span> →</button>
+      <a href="mailto:connect@youcloudtech.com" data-i18n="cta.b2" style="border:1px solid rgba(255,255,255,0.3); color:#fff; border-radius:12px; padding:18px 30px; font-size:17px; font-weight:600;">Or email connect@youcloudtech.com</a>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <div style="background:#081222; padding:clamp(48px,6vw,70px) clamp(16px,3vw,40px) 40px;">
+    <div style="max-width:1400px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr)); gap:36px;">
+      <div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <img src="assets/logo.png" alt="youcloud" style="height:26px; width:auto; filter:brightness(0) invert(1);">
+        </div>
+        <p data-i18n="ft.blurb" style="font-size:16px; color:rgba(255,255,255,0.7); line-height:1.6; margin:20px 0 22px; max-width:380px;">One tool for all your business headache. POS, payments, HR, books, marketing and AI — for UAE merchants.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; max-width:380px;">
+          <span class="yc-mono" style="background:rgba(255,255,255,0.08); color:#fff; border-radius:8px; padding:8px 12px; font-size:11px;">Under CB UAE licensee</span>
+          <span class="yc-mono" style="background:rgba(255,255,255,0.08); color:#fff; border-radius:8px; padding:8px 12px; font-size:11px;">PCI DSS L1</span>
+          <span class="yc-mono" style="background:rgba(255,255,255,0.08); color:#fff; border-radius:8px; padding:8px 12px; font-size:11px;">FTA e-invoice</span>
+          <span class="yc-mono" style="background:rgba(255,255,255,0.08); color:#fff; border-radius:8px; padding:8px 12px; font-size:11px;">EMV L1+L2</span>
+        </div>
+      </div>
+      <div>
+        <div class="yc-mono" style="font-size:11px; color:rgba(255,255,255,0.55); margin-bottom:18px;">Platform</div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <a href="#how" data-i18n="nav.how" style="color:#fff; font-size:16px;">How it works</a>
+          <a href="#hardware" data-i18n="nav.hw" style="color:#fff; font-size:16px;">Hardware</a>
+          <a href="#pricing" data-i18n="nav.pricing" style="color:#fff; font-size:16px;">Pricing</a>
+          <a href="#pricing" data-i18n="ft.compare" style="color:#fff; font-size:16px;">Compare</a>
+          <a href="YouCloud Enterprise.dc.html" data-i18n="nav.ent" style="color:#fff; font-size:16px;">Enterprise</a>
+        </div>
+      </div>
+      <div>
+        <div class="yc-mono" style="font-size:11px; color:rgba(255,255,255,0.55); margin-bottom:18px;">For merchants</div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <a href="YouCloud Solutions.dc.html#s5" data-i18n="uae.c1t" style="color:#fff; font-size:16px;">Retail shops</a>
+          <a href="YouCloud Solutions.dc.html#s1" data-i18n="uae.c2t" style="color:#fff; font-size:16px;">Restaurants &amp; cafes</a>
+          <a href="YouCloud Solutions.dc.html#s5" data-i18n="uae.c3t" style="color:#fff; font-size:16px;">Salons &amp; services</a>
+          <a href="YouCloud Solutions.dc.html#s6" data-i18n="uae.c4t" style="color:#fff; font-size:16px;">Chains &amp; franchises</a>
+          <a href="#top" onClick="{{ openForm }}" data-i18n="nav.demo" style="color:#fff; font-size:16px;">Book a demo</a>
+        </div>
+      </div>
+      <div>
+        <div class="yc-mono" style="font-size:11px; color:rgba(255,255,255,0.55); margin-bottom:18px;">Support · 24/7</div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <a href="#faq" data-i18n="ft.contact" style="color:#fff; font-size:16px;">Contact support</a>
+          <a href="mailto:support@youcloudtech.com" style="color:#fff; font-size:16px;">support@youcloudtech.com</a>
+          <a href="mailto:connect@youcloudtech.com" style="color:#fff; font-size:16px;">connect@youcloudtech.com</a>
+          <a href="#faq" data-i18n="ft.help" style="color:#fff; font-size:16px;">Help centre</a>
+          <span style="color:#fff; font-size:16px;">English · العربية</span>
+          <div style="margin-top:22px; font-size:15px; color:rgba(255,255,255,0.62); line-height:1.6;">Youcloud Paytech DIFC<br>Gate Avenue, Zone D, Level 1<br>DIFC, Dubai, UAE</div>
+          <span style="color:#fff; font-size:16px;">हिंदी · Tagalog</span>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1400px; margin:46px auto 0; padding-top:26px; border-top:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+      <span class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.55); text-transform:none; letter-spacing:0.05em;">© 2026 youcloud · Dubai, UAE · All rights reserved</span>
+      <span style="display:flex; gap:26px;">
+        <a href="#privacy" class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.55); text-transform:none;">Privacy</a>
+        <a href="#terms" class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.55); text-transform:none;">Terms</a>
+        <a href="#security" class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.55); text-transform:none;">Security</a>
+        <span class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.55); text-transform:none;">FTA · VAT</span>
+        <span class="yc-mono" style="font-size:12px; color:rgba(255,255,255,0.55); text-transform:none;">PCI</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ================= LEAD FORM ================= -->
+  <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; inset:0; z-index:90; background:rgba(8,18,34,0.55); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; padding:24px;">
+      <div style="width:100%; max-width:560px; max-height:92vh; overflow-y:auto; background:#fff6ef; border-radius:26px; padding:30px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:16px;">
+          <sc-if value="{{ canBack }}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{ back }}" style="background:none; border:none; font-family:'Poppins',sans-serif; font-size:17px; font-weight:600; color:#132340; cursor:pointer; padding:0;">← <span data-i18n="form.back">Back</span></button>
+          </sc-if>
+          <div style="display:flex; background:#fff; border:1px solid #f0ddd2; border-radius:999px; padding:3px; margin-left:auto;">
+            <button onClick="{{ setEN }}" class="yc-mono" style="{{ enPill }}">EN</button>
+            <button onClick="{{ setAR }}" style="{{ arPill }}">العربية</button>
+          </div>
+          <button onClick="{{ closeForm }}" style="background:none; border:none; font-size:22px; color:#8b93a4; cursor:pointer; padding:0 4px;">✕</button>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:20px;">
+          <div style="height:4px; border-radius:999px; background:{{ bar1 }};"></div>
+          <div style="height:4px; border-radius:999px; background:{{ bar2 }};"></div>
+          <div style="height:4px; border-radius:999px; background:{{ bar3 }};"></div>
+        </div>
+
+        <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <div style="background:#fff; border-radius:18px; padding:22px; margin-top:22px;">
+              <span class="yc-mono" style="font-size:12px; color:#fb5f5f;">● Book a 15-min call</span>
+              <h3 class="yc-disp" style="font-size:30px; margin:14px 0 0; line-height:1.22;"><span data-i18n="form.s1t">Everything your shop needs —</span> <span class="yc-italic" data-i18n="form.s1ti">in one box.</span></h3>
+              <div style="display:flex; justify-content:center; margin-top:16px;">
+                <img src="assets/form-kit.png" alt="" style="height:170px; object-fit:contain; border-radius:12px;">
+              </div>
+            </div>
+            <label style="display:block; margin-top:22px;">
+              <b data-i18n="form.shopName" style="font-size:17px;">Your shop name</b>
+              <input value="{{ shopName }}" onChange="{{ setShopName }}" placeholder="e.g. Al Karama Stores" style="width:100%; box-sizing:border-box; margin-top:10px; background:#fff; border:1px solid #efe0d5; border-radius:14px; padding:17px; font-family:'Poppins',sans-serif; font-size:17px; color:#132340;">
+            </label>
+            <label style="display:block; margin-top:20px;">
+              <b data-i18n="form.mobile" style="font-size:17px;">Mobile number</b>
+              <span style="display:flex; margin-top:10px; background:#fff; border:1px solid #efe0d5; border-radius:14px; overflow:hidden;">
+                <span style="display:flex; align-items:center; gap:8px; padding:17px; border-right:1px solid #f2e6dc; font-size:17px;">🇦🇪 <b>+971</b></span>
+                <input value="{{ phone }}" onChange="{{ setPhone }}" placeholder="50 123 4567" style="flex:1; border:none; outline:none; padding:17px; font-family:'Poppins',sans-serif; font-size:17px; color:#132340; background:none;">
+              </span>
+            </label>
+            <div style="margin-top:22px;">
+              <b data-i18n="form.kind" style="font-size:17px;">What kind of shop?</b>
+              <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:12px;">
+                <sc-for list="{{ kinds }}" as="k" hint-placeholder-count="4">
+                  <button onClick="{{ k.pick }}" style="{{ k.style }}">{{ k.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <span class="yc-mono" style="display:block; margin-top:22px; font-size:13px; color:#fb5f5f;">Step 2 of 3</span>
+            <h3 class="yc-disp" style="font-size:30px; margin:12px 0 0;"><span data-i18n="form.s2t">Tell us</span> <span class="yc-italic" data-i18n="form.s2ti">about your setup.</span></h3>
+            <p data-i18n="form.s2sub" style="font-size:17px; color:#5b6579; margin:10px 0 0;">So we can prep the right demo for you.</p>
+            <div style="margin-top:22px;">
+              <b data-i18n="form.size" style="font-size:17px;">Business size</b>
+              <div style="display:flex; flex-direction:column; gap:12px; margin-top:12px;">
+                <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="3">
+                  <button onClick="{{ s.pick }}" style="{{ s.style }}"><b style="font-size:18px; display:block;">{{ s.label }}</b><span style="font-size:15px; color:#6c7687;">{{ s.sub }}</span></button>
+                </sc-for>
+              </div>
+            </div>
+            
+            <div style="margin-top:22px;">
+              <b data-i18n="form.online" style="font-size:17px;">Do you sell online too?</b>
+              <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:12px;">
+                <sc-for list="{{ onlineOpts }}" as="o" hint-placeholder-count="2">
+                  <button onClick="{{ o.pick }}" style="{{ o.style }}">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <span class="yc-mono" style="display:block; margin-top:22px; font-size:13px; color:#fb5f5f;">Almost done · 30 seconds</span>
+            <h3 class="yc-disp" style="font-size:30px; margin:12px 0 0; line-height:1.22;"><span data-i18n="form.s3t">What do you</span> <span class="yc-italic" data-i18n="form.s3ti">need help with?</span></h3>
+            <p data-i18n="form.s3sub" style="font-size:17px; color:#5b6579; margin:10px 0 0;">Pick anything relevant — we'll walk through it on the call.</p>
+            <div style="margin-top:22px;">
+              <div style="display:flex; justify-content:space-between; align-items:baseline;">
+                <b data-i18n="form.prio" style="font-size:17px;">Top priorities</b>
+                <span style="font-size:14px; color:#8b93a4;">{{ prioCount }}</span>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:12px;">
+                <sc-for list="{{ priorities }}" as="p" hint-placeholder-count="6">
+                  <button onClick="{{ p.pick }}" style="{{ p.style }}">{{ p.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+            <label style="display:block; margin-top:22px;">
+              <span style="display:flex; justify-content:space-between; align-items:baseline;">
+                <b data-i18n="form.else" style="font-size:17px;">Anything else we should prep?</b>
+                <span class="yc-mono" style="font-size:11px; color:#8b93a4;">Optional</span>
+              </span>
+              <textarea value="{{ notes }}" onChange="{{ setNotes }}" placeholder="e.g. I want to add a 2nd branch next month" style="width:100%; box-sizing:border-box; margin-top:10px; min-height:110px; background:#fff; border:1px solid #efe0d5; border-radius:14px; padding:17px; font-family:'Poppins',sans-serif; font-size:17px; color:#132340; resize:vertical;"></textarea>
+            </label>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center; padding:40px 10px 20px;">
+            <div style="width:60px; height:60px; border-radius:50%; background:#fb5f5f; color:#fff; font-size:28px; display:flex; align-items:center; justify-content:center; margin:0 auto;">✓</div>
+            <h3 class="yc-disp" style="font-size:28px; margin:20px 0 0;" data-i18n="form.doneT">Your call is requested.</h3>
+            <p data-i18n="form.doneB" style="font-size:17px; color:#5b6579; margin:12px 0 0;">Our team will confirm a 15-minute slot within one business hour.</p>
+            <button onClick="{{ closeForm }}" data-i18n="form.close" style="margin-top:26px; background:#132340; color:#fff; border:none; border-radius:12px; padding:16px 28px; font-family:'Poppins',sans-serif; font-size:16px; font-weight:600; cursor:pointer;">Close</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showNext }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ next }}" disabled="{{ nextDisabled }}" style="{{ nextStyle }}">{{ nextLabel }} →</button>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1600}}">
+class Component extends DCLogic {
+  state = { lang:'en', menuOpen:false, formOpen:false, step:1, shopName:'', phone:'', kind:'', size:'', outlets:'', online:'', prios:[], notes:'', openFaq:0 };
+
+  root = React.createRef();
+
+  dict = {
+    'nav.how':'كيف يعمل','nav.sol':'الحلول','nav.hw':'الأجهزة','nav.pricing':'الأسعار','nav.ent':'الشركات','nav.signin':'تسجيل الدخول','nav.demo':'احجز عرضاً',
+    'hero.badge':'الانطلاق في الإمارات','hero.t1':'أداة واحدة لكل','hero.t2':'صداع عملك.',
+    'hero.sub':'الفوترة والمخزون والمدفوعات والطلب عبر QR والولاء والعروض ورؤى الذكاء الاصطناعي والإدارة (الموارد البشرية، الرواتب، الحسابات) — مجموعة واحدة. تطبيق واحد. جاهز للعمل في أقل من ساعة.',
+    'hero.seg1':'متاجر التجزئة','hero.seg2':'المطاعم','hero.seg3':'السلع الاستهلاكية','hero.seg4':'الخدمات','hero.cta1':'احجز عرضاً مجانياً 15 دقيقة','hero.cta2':'شاهد كيف يعمل','hero.from':'من درهم',
+    'hero.s1':'شامل الكل. نقاط بيع + مدفوعات + إدارة + ذكاء اصطناعي.','hero.s2':'للانطلاق في متجرك أو مطبخك أو صالونك.','hero.s3':'تسوية في نفس اليوم إلى أي آيبان إماراتي.',
+    'trust.a1':'تحت','trust.a2':'شريك مرخّص للاستحصال','trust.b':'جاهز للفاتورة الإلكترونية','trust.c':'إلى أي آيبان إماراتي','trust.d':'دعم على مدار الساعة',
+    'head.t1':'ثمانية حسابات. ثماني فواتير.','head.t2':'صفر نوم.',
+    'head.sub':'كل تاجر إماراتي نلتقيه يدفع لنفس الأدوات الثمانية — ويخسر ساعة يومياً في ربطها ببعضها عبر الإكسل ومجموعات الدردشة.',
+    'head.frank':'المنظومة المرقّعة','head.franksub':'تسعة اشتراكات. ثمانية حسابات. لا شيء منها يتحدث مع الآخر.','head.total':'إجمالي ما تدفعه اليوم',
+    'head.yc1':'تطبيق واحد. حساب واحد. فاتورة شهرية واحدة.','head.yc2':'كل وحدة تتحدث مع كل الوحدات الأخرى.','head.allin':'تبدأ من، شاملة',
+    'box.t1':'من الصندوق إلى أول بيع —','box.t2':'قبل الغداء.','box.sub':'تجار إماراتيون حقيقيون يبدأون البيع خلال فترة الغداء. بلا مشروع تكامل. بلا مستشارين. بلا أعذار.',
+    'box.not':'ليس 60 يوماً.','box.foot':'متوسط الوقت من فتح الصندوق إلى أول بيع مسوّى، لدى أكثر من 200 تاجر تجريبي في الإمارات.',
+    'how.t1':'كل نقطة بيع، كل مطبخ، كل','how.t2':'وردية عمل — في','how.t3':'صورة حية واحدة.','how.sub':'سبعة أمور يقوم بها كل تاجر إماراتي. كلها تعمل على نفس البيانات المشتركة، من تطبيق واحد.',
+    'f1.t':'امسح، افتر، واستلم الدفع —','f1.ti':'على جهاز واحد.',
+    'f1.p1':'كل نقطة بيع تشغّل البيع والدفع معاً. نفس الجهاز الذي يمسح الباركود يسوّي البطاقة ويطبع الإيصال ويُدخل البيع في دفاترك.',
+    'f1.p2':'يعمل دون إنترنت — البيع يستمر عند انقطاع الواي فاي.','f1.p2b':'لا تفقد أي عملية بيع.','f1.cta':'احجز عرضاً','f2.choose':'اختر طريقة الدفع',
+    'f2.t':'نقد. بطاقة. محفظة. رمز QR. رابط دفع.','f2.ti':'وحتى تقسيم الفاتورة.',
+    'f2.p1':'كل وسيلة دفع يريدها عميلك — نقد، شريحة ورقم سري، بطاقة لاسلكية، Apple Pay / Samsung Pay / Google Pay، ائتمان، رمز QR المحلي، ورابط دفع للطلبات البعيدة — كلها على نفس الجهاز وفي تسوية واحدة.',
+    'f2.p2b':'تقسيم فاتورة على 4؟','f2.p2':'لمسة واحدة. بطاقتان + نقد + QR؟ إيصال واحد. بلا حسابات يدوية ولا نادل مرتبك.',
+    'f3.t':'مخزون صحيح في','f3.ti':'كل فرع.',
+    'f3.p1':'ينقص المخزون لحظة البيع — في أي مكان وعبر أي قناة. صوّر فاتورة المورّد ويقوم نظام التعرّف الضوئي بإدخالها في السجل. تنبيهات نقص، تحويلات بين الفروع، تتبع الدفعات وتواريخ الانتهاء.',
+    'f3.p2b':'رمز واحد. حقيقة واحدة.','f3.p2':'في كل فرع لديك في الإمارات.','f3.card':'المخزون — مباشر في كل فروعك',
+    'f4.t':'عملاء يعودون','f4.ti':'بقصد.',
+    'f4.p1':'كل عملية بطاقة وكل مسح QR يُكتب في نفس سجل العملاء. جزّئ حسب الإنفاق والتكرار وتنوع المنتجات. أرسل عروضاً عبر الرسائل والبريد — كما يشتري سوق الإمارات فعلاً.',
+    'f4.p2b':'تسويق يمكنك قياسه','f4.p2':'— لأن الحملة والقسيمة والبيع المسوّى كلها في سجل واحد.','f4.card':'العملاء المتكررون · هذا الشهر',
+    'f5.t':'الرقم في لوحة التحكم هو','f5.ti':'الرقم في البنك.',
+    'f5.p1':'لأن يوكلاود تستحصل البطاقة وتسجّل البيع، يُقيَّد الحدثان في نفس السجل. تسوية في نفس اليوم (T+0) إلى حسابك في الإمارات دبي الوطني أو الأول أبوظبي أو أبوظبي التجاري أو المشرق.',
+    'f5.p2b':'إغلاق الشهر يأخذ ساعة.','f5.p2':'ليس أسبوعاً، ولا عقد محاسب.','f5.card':'التسوية · اليوم في كل الفروع',
+    'f6.t':'الموارد البشرية والمحاسبة والتسويق','f6.ti':'مربوطة بكل عملية بيع.',
+    'f6.p1':'الإدارة الخلفية ليست منظومة منفصلة تُزامنها ليلاً. الرواتب تُحسب من بيانات الورديات التي سجّلتها نقطة البيع. كل بيع يُقيَّد تلقائياً في دفاترك وجاهز للهيئة. وشرائح الحملات تُقرأ من العمليات الحية.',
+    'f6.p2b':'ثلاث إدارات. بيانات مشتركة واحدة.','f6.p2':'إغلاق شهري واحد.',
+    'f7.t':'ذكاء اصطناعي يعرف عملك','f7.ti':'لأنه بياناتك.',
+    'f7.p1':'لأن كل حدث يعيش في سجل واحد مشترك، الرؤى ليست تقريراً تنزّله. كاميرات المتجر ترى ما يحدث على الأرض. الأتمتة تتصرف على إشارات حية. والتوقعات تتدرب على عملياتك أنت.',
+    'f7.p2b':'بلا مشروع مستودع بيانات.','f7.p2':'بلا منظومة إضافات. كل شيء يأتي مع التطبيق.',
+    'pay.kicker':'المدفوعات · اقبل كل وسيلة دفع','pay.l1':'وسائل الدفع','pay.b1':'نقداً وبطاقة و Apple / Samsung / Google Pay وائتمان و QR الإمارات والدفع عبر الرابط.','pay.l2':'طرق التقسيم','pay.b2':'بطاقتان + نقد + QR في فاتورة واحدة. إيصال واحد.','pay.l3':'التسوية','pay.b3':'كل وسائل الدفع في تسوية واحدة.',
+    'lend.kicker':'youLend · رأس مال عامل','lend.t':'رأس مال عامل،','lend.ti':'معتمد مسبقاً.','lend.p1':'كل عملية بطاقة وكل مسح QR يضيف إلى ملفك الائتماني كتاجر. عندما تحتاج مخزوناً لرمضان أو العيد أو فرعاً ثانياً، يكون التمويل محدد الحجم ومسعّراً بالدرهم ومعتمداً مسبقاً — في لوحة التحكم.','lend.p2':'يُسدَّد كنسبة من تسويتك اليومية T+0 إلى حسابك المصرفي في الإمارات. مشاركة في الإيرادات، بلا رسوم شهرية.','lend.cta':'تحقق من عرضي',
+    'hw.t':'الأجهزة تصل مشحونة ومفعّلة','hw.ti':'وجاهزة للبيع.','hw.sub':'من حزمة هاتف وطابعة بلوتوث إلى جهاز كاونتر بشاشتين. كل جهاز يشغّل يوكلاود أصلياً. توصيل في اليوم التالي في كل الإمارات.',
+    'uae.t1':'من بقالة الحي في كرامة','uae.t2':'إلى صالون','uae.t3':'المارينا.','uae.sub':'تجزئة ومطاعم وخدمات — نفس التطبيق، قوالب مختلفة. السلاسل والامتيازات متعددة الفروع تحصل على تحكم مركزي فوقها.',
+    'uae.c1t':'متاجر التجزئة','uae.c1b':'بقالات، تمور وحلويات، أقمشة، إلكترونيات، صيدليات. فواتير بالباركود، مخزون بين الفروع، وولاء على هاتفك.',
+    'uae.c2t':'المطاعم والمقاهي','uae.c2b':'نقاط بيع للطاولات، شاشة مطبخ، مزامنة طلبات وكريم، توصيل مباشر، وحجوزات أونلاين. البقشيش يُجمع والموظفون يُدفع لهم.',
+    'uae.c3t':'الصالونات والخدمات','uae.c3b':'حجوزات، تدفق على الكرسي، عمولات الموظفين، بيع المنتجات، وتذكيرات بالرسائل. من كرامة إلى سيتي ووك، بنظام واحد.',
+    'uae.c4t':'السلاسل والامتيازات','uae.c4b':'عرض مطبخ واحد لكل الفروع والتطبيقات، قائمة مركزية واحدة، وتسوية واحدة — مع حكامة امتياز مدمجة.','uae.map':'كل فروع الإمارات',
+    'cmp.t':'نفس سوق الإمارات.','cmp.ti':'تطبيق مختلف تماماً.','cmp.sub':'اللاعبون المحليون الكبار يجيدون المدفوعات — لكن نقاط البيع والموارد البشرية والدفاتر والتسويق والذكاء الاصطناعي؟ ما زالت ثمانية مزوّدين.',
+    'cmp.foot':'المقارنة مبنية على معلومات المنتجات المتاحة علناً حتى سبتمبر 2026. Geidea و Network International علامتان تجاريتان لمالكيهما — تُستخدمان للمقارنة المرجعية فقط.',
+    'pr.t':'شامل الكل. بالدرهم.','pr.ti':'بلا مفاجآت.','pr.sub':'السعر لكل نقطة بيع شهرياً. المدفوعات تُسعَّر حسب الشبكة والحجم. كل الفئات سنوية — بلا إعادة تكامل عند الترقية.',
+    'pr.s1':'لمتجر أو مقهى أو صالون ينمو ومستعد للتوحّد على نظام واحد.','pr.s2':'لمشغّلي الفروع المتعددة الذين يشغّلون المنصة كاملة — نقاط بيع + مدفوعات + موارد بشرية + دفاتر + تسويق + ذكاء اصطناعي.',
+    'pr.s3':'للسلاسل والامتيازات والمجموعات متعددة العلامات مع مشتريات ودخول موحّد ومتطلبات جهوزية على مدار الساعة.',
+    'pr.book':'احجز عرضاً','pr.book2':'احجز عرضاً','pr.contact':'تواصل مع فريق الشركات',
+    'ao.t':'شغّل الذكاء الاصطناعي','ao.ti':'عندما تكون مستعداً.','ao.sub':'كل الإضافات تعمل على نفس بيانات التاجر. أضف واحدة هذا الربع وأخرى في التالي — بلا إعادة تكامل.',
+    'ao.foot':'المدفوعات — فيزا/ماستركارد 1.9–2.4%، أمكس 2.9–3.4%، المحافظ المحلية 0.9–1.5%، مسارات QR 0.5–1.2%. خصومات حجم على Power و Enterprise.',
+    'faq.t':'أجوبة مباشرة','faq.ti':'لتجار الإمارات.','faq.sub':'أسئلة شائعة من أصحاب المتاجر وأصحاب المطاعم ومشغّلي الامتيازات الذين يقيّمون المنصة.',
+    'faq.talkT':'تفضّل التحدث؟','faq.talkB':'اتصل بفريقنا في الإمارات مباشرة — بالإنجليزية أو العربية أو الهندية أو التاغالوغية. نجيب في أقل من 5 دقائق خلال ساعات العمل.','faq.talkCta':'احجز مكالمة 15 دقيقة',
+    'cta.t1':'أداة واحدة.','cta.t2':'حساب واحد.','cta.t3':'صداع أقل.','cta.sub':'احجز عرضاً مجانياً مدته 15 دقيقة. شاهده يعمل بقائمة منتجاتك ومنيوك وفرعك. وانطلق في 60 دقيقة عندما تكون مستعداً.',
+    'cta.b1':'احجز عرضاً مجانياً 15 دقيقة','cta.b2':'أو راسلنا على connect@youcloudtech.com',
+    'ft.blurb':'أداة واحدة لكل صداع عملك. نقاط بيع، مدفوعات، موارد بشرية، دفاتر، تسويق وذكاء اصطناعي — لتجار الإمارات.',
+    'ft.compare':'مقارنة','ft.contact':'تواصل مع الدعم','ft.help':'مركز المساعدة','ft.about':'من نحن','ft.careers':'وظائف','ft.press':'الصحافة','ft.docs':'الوثائق وواجهات البرمجة','ft.contact2':'اتصل بنا',
+    'form.back':'رجوع','form.s1t':'كل ما يحتاجه متجرك —','form.s1ti':'في صندوق واحد.','form.shopName':'اسم متجرك','form.mobile':'رقم الهاتف','form.kind':'ما نوع متجرك؟',
+    'form.s2t':'أخبرنا','form.s2ti':'عن إعدادك.','form.s2sub':'حتى نحضّر العرض المناسب لك.','form.size':'حجم العمل','form.outlets':'كم عدد الفروع؟','form.online':'هل تبيع أونلاين أيضاً؟',
+    'form.s3t':'ما الذي','form.s3ti':'تحتاج مساعدة فيه؟','form.s3sub':'اختر ما يناسبك — سنمر عليه في المكالمة.','form.prio':'أهم الأولويات','form.else':'أي شيء آخر نحضّره؟',
+    'form.doneT':'تم تسجيل طلب مكالمتك.','form.doneB':'سيؤكد فريقنا في الإمارات موعداً مدته 15 دقيقة خلال ساعة عمل واحدة.','form.close':'إغلاق'
+  };
+
+  componentDidMount() {
+    this.cache();
+    import('./i18n-ar.js').then(m => { this.phrases = m.phrases; if (this.state.lang === 'ar') this.apply('ar'); }).catch(() => {});
+  }
+  componentDidUpdate() { if (this.state.lang === 'ar') this.apply('ar'); else if (this._applied === 'ar') { this.apply('en'); this._applied = 'en'; } }
+
+  cache() {
+    const el = this.root.current; if (!el) return;
+    this._en = new Map();
+    el.querySelectorAll('[data-i18n]').forEach(n => this._en.set(n, n.textContent));
+  }
+  apply(lang) {
+    const el = this.root.current; if (!el) return;
+    if (!this._en) this.cache();
+    el.querySelectorAll('[data-i18n]').forEach(n => {
+      if (!this._en.has(n)) this._en.set(n, n.textContent);
+      const k = n.getAttribute('data-i18n');
+      n.textContent = lang === 'ar' ? (this.dict[k] || this._en.get(n)) : this._en.get(n);
+    });
+    const ph = this.phrases || {};
+    if (!this._tn) this._tn = new Map();
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (w.nextNode()) nodes.push(w.currentNode);
+    nodes.forEach(n => {
+      const p = n.parentElement;
+      if (!p || p.closest('[data-i18n]') || p.closest('script,style')) return;
+      if (!this._tn.has(n)) this._tn.set(n, n.nodeValue);
+      const raw = this._tn.get(n) || '';
+      const orig = raw.trim();
+      if (!orig) return;
+      if (lang !== 'ar') { n.nodeValue = raw; return; }
+      let tr = ph[orig];
+      if (!tr) {
+        const m = orig.match(/^([\u2713\u2715\u2192\u25cf]\s*)/);
+        if (m) { const t2 = ph[orig.slice(m[1].length)]; if (t2) tr = m[1] + t2; }
+      }
+      if (tr) n.nodeValue = raw.replace(orig, tr);
+    });
+    el.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    this._applied = lang;
+  }
+  setLang = (l) => { this.setState({ lang:l }, () => this.apply(l)); };
+
+  pill(on) {
+    return on
+      ? 'background:#132340;color:#fff;border:none;border-radius:999px;padding:8px 14px;font-size:12px;cursor:pointer;'
+      : 'background:none;color:#6c7687;border:none;border-radius:999px;padding:8px 14px;font-size:12px;cursor:pointer;font-family:inherit;';
+  }
+  optStyle(on, extra) {
+    return (on
+      ? 'background:#132340;color:#fff;border:1px solid #132340;'
+      : 'background:#fff;color:#132340;border:1px solid #efe0d5;')
+      + 'border-radius:14px;padding:16px 18px;font-family:\'Poppins\',sans-serif;font-size:17px;font-weight:600;cursor:pointer;text-align:left;' + (extra || '');
+  }
+
+  toggleFaq = (i) => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i }));
+  togglePrio = (p) => this.setState(s => ({ prios: s.prios.includes(p) ? s.prios.filter(x => x !== p) : s.prios.concat(p) }));
+
+  sendLead() {
+    const S = this.state;
+    const rows = [['Shop name',S.shopName],['Mobile', S.phone ? '+971 ' + S.phone : ''],['Business type',S.kind],['Business size',S.size],['Sells online',S.online],['Priorities',(S.prios||[]).join(', ')],['Notes',S.notes]];
+    const body = rows.filter(r => r[1]).map(r => r[0] + ': ' + r[1]).join('\n');
+    const url = 'mailto:connect@youcloudtech.com?cc=arun@youcloudtech.com&subject='
+      + encodeURIComponent('Demo request - ' + (S.shopName || 'youcloud')) + '&body=' + encodeURIComponent(body);
+    window.location.href = url;
+  }
+
+  renderVals() {
+    const S = this.state, ar = S.lang === 'ar';
+    const faqData = [
+      ['Is this really one app, or eight products in a menu?','One app. One login. One shared data. When you turn on Marketing, it already knows your customers. When you turn on Bookkeeping, every sale is already posted. No import, no re-integration, no double-entry.'],
+      ['What UAE banks do you settle to?','Same-day (T+0) settlement to any UAE IBAN — Emirates NBD, FAB, ADCB, Mashreq and the rest. The money lands in your operating account, matched line by line to the sale that created it.'],
+      ['Are you licensed by CB UAE?','We operate under a Central Bank of the UAE licensed acquiring partner, and the platform is PCI DSS Level 1 certified with PCI PTS 5.x SRED terminals.'],
+      ['Is it FTA e-invoicing and VAT ready?','Yes. Every sale posts VAT-coded to your books in real time, and e-invoicing is built in rather than bolted on at year-end.'],
+      ['What language does the app support?','English, العربية, हिंदी and Tagalog across the app, the receipts and 24/7 support — the languages UAE shop floors actually run on.'],
+      ['What if I already have Talabat, Careem or Deliveroo?','Keep them. Orders sync into the same KDS and the same books, so aggregator sales reconcile alongside your walk-in tills instead of in a separate spreadsheet.'],
+      ['How much does hardware cost?','From AED 699 one-time for the y1000 handheld up to AED 1,999 for the dual-screen y5000 counter. Kits ship next-day across the UAE, pre-activated — you just log in.']
+    ];
+    const prioLabels = ['Billing & Stock','Cards & QR','Multi-branch','VAT invoices','Loyalty & SMS','Payroll'];
+    const kindLabels = ['Retail / Grocery','Restaurant / Café','Salon / Service','Something else'];
+    const sizeData = [['Small — single shop','Just me / small team'],['Growing — 2–5 outlets','Multiple locations'],['Enterprise — 6+ outlets','Chain / franchise']];
+    const nextReady = (S.step === 1 && S.shopName && S.phone && S.kind) || (S.step === 2 && S.size && S.online) || S.step === 3;
+
+    return {
+      root: this.root,
+      menuOpen: this.state.menuOpen,
+      menuIcon: this.state.menuOpen ? '✕' : '☰',
+      toggleMenu: () => this.setState(st => ({ menuOpen: !st.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen:false }),
+      setEN: () => this.setLang('en'), setAR: () => this.setLang('ar'),
+      enPill: this.pill(!ar), arPill: this.pill(ar) + "font-family:'Noto Kufi Arabic',sans-serif;",
+
+      openForm: () => this.setState({ formOpen:true, step:1 }),
+      closeForm: () => this.setState({ formOpen:false }),
+      formOpen: S.formOpen,
+      isStep1: S.step === 1, isStep2: S.step === 2, isStep3: S.step === 3, isDone: S.step === 4,
+      canBack: S.step > 1 && S.step < 4,
+      back: () => this.setState(s => ({ step: s.step - 1 })),
+      next: () => { if (!nextReady) return; if (S.step === 3) this.sendLead(); this.setState(s => ({ step: s.step + 1 })); },
+      nextDisabled: !nextReady,
+      showNext: S.step < 4,
+      nextLabel: S.step === 3 ? (ar ? 'احجز مكالمتي' : 'Book my call') : (ar ? 'متابعة' : 'Continue'),
+      nextStyle: 'width:100%;margin-top:26px;border:none;border-radius:14px;padding:19px;font-family:\'Poppins\',sans-serif;font-size:18px;font-weight:700;cursor:pointer;'
+        + (nextReady ? 'background:#fb5f5f;color:#fff;' : 'background:#eef0f6;color:#98a1b4;'),
+      bar1: '#fb5f5f', bar2: S.step >= 2 ? '#fb5f5f' : '#e9ecf3', bar3: S.step >= 3 ? '#fb5f5f' : '#e9ecf3',
+
+      shopName: S.shopName, setShopName: e => this.setState({ shopName:e.target.value }),
+      phone: S.phone, setPhone: e => this.setState({ phone:e.target.value }),
+      notes: S.notes, setNotes: e => this.setState({ notes:e.target.value }),
+      kinds: kindLabels.map(l => ({ label:l, pick:() => this.setState({ kind:l }), style:this.optStyle(S.kind === l) })),
+      sizes: sizeData.map(([l,sub]) => ({ label:l, sub, pick:() => this.setState({ size:l }), style:this.optStyle(S.size === l) })),
+            onlineOpts: ['Just my shop','Yes, online too'].map(l => ({ label:l, pick:() => this.setState({ online:l }), style:this.optStyle(S.online === l,'text-align:center;') })),
+      priorities: prioLabels.map(l => ({ label: (S.prios.includes(l) ? '✓ ' : '') + l, pick:() => this.togglePrio(l), style:this.optStyle(S.prios.includes(l),'border-radius:999px;padding:14px 22px;font-size:16px;') })),
+      prioCount: S.prios.length ? S.prios.length + (ar ? ' مختارة' : ' selected') : '',
+
+      stack: [
+        { name:'POS vendor', price:'90' }, { name:'Payment terminal rent', price:'65' },
+        { name:'Inventory app', price:'75' }, { name:'Messaging CRM', price:'55' },
+        { name:'Accounting software', price:'79' }, { name:'HR & payroll', price:'85' },
+        { name:'Loyalty stamps app', price:'45' }, { name:'BI & reports', price:'60' }
+      ],
+      modules: [
+        { name:'POS', icon:'▭' }, { name:'Payment', icon:'▬' }, { name:'Books', icon:'▤' }, { name:'HR', icon:'☖' },
+        { name:'Marketing', icon:'◁' }, { name:'AI Lens', icon:'◎' }, { name:'AI Flow', icon:'⋔' }, { name:'Insights', icon:'◿' }
+      ],
+      steps: [
+        { n:'01', min:'Minute 0–5', title:'Unbox the kit', body:'Terminal ships pre-paired with your merchant account. Plug in the power. Connect Wi-Fi.', bg:'#fff' },
+        { n:'02', min:'Minute 5–20', title:'Log in & import', body:'Snap your product list, menu or PDF price sheet — our AI OCR keys it in. Or upload a CSV.', bg:'#fff8f3' },
+        { n:'03', min:'Minute 20–45', title:'Add staff & test', body:'Add cashiers, waiters or stylists — each gets a login. Run a AED 1 test sale to your own card.', bg:'#fff' },
+        { n:'04', min:'Minute 45–60', title:'Ring your first sale', body:'Take payments — cards, wallets, QR. Money settles same-day to your Emirates NBD, FAB or ADCB account.', bg:'#fff8f3' }
+      ],
+      tenders: [
+        { name:'Card', icon:'▭', bg:'#ffe5e2', bd:'#ffc9c3', fg:'#e8484f' },
+        { name:'Cash', icon:'▦', bg:'#fff', bd:'#efe6df', fg:'#3c475d' },
+        { name:'Wallet', icon:'▤', bg:'#ffe5e2', bd:'#ffc9c3', fg:'#e8484f' },
+        { name:'QR', icon:'⬚', bg:'#fff', bd:'#efe6df', fg:'#3c475d' },
+        { name:'Pay-by-Link', icon:'⛓', bg:'#fff', bd:'#efe6df', fg:'#3c475d' },
+        { name:'Credit', icon:'▭', bg:'#fff', bd:'#efe6df', fg:'#3c475d' }
+      ],
+      stockRows: [
+        { name:'Basmati Rice 5kg', sku:'GRO-001', cat:'Grocery', catFg:'#3c475d', marina:'20', karama:'2', jbr:'12', total:'34', c1:'#3c475d', c2:'#fb5f5f', c3:'#3c475d' },
+        { name:'Arabic Coffee 250g', sku:'BEV-004', cat:'Beverage', catFg:'#3c475d', marina:'2', karama:'18', jbr:'0', total:'20', c1:'#fb5f5f', c2:'#3c475d', c3:'#fb5f5f' },
+        { name:'Karak Chai Mix', sku:'BEV-012', cat:'Beverage', catFg:'#3c475d', marina:'11', karama:'3', jbr:'2', total:'16', c1:'#3c475d', c2:'#fb5f5f', c3:'#fb5f5f' },
+        { name:'Medjool Dates 1kg', sku:'GRO-018', cat:'Low stock', catFg:'#e8484f', marina:'8', karama:'2', jbr:'2', total:'12', c1:'#3c475d', c2:'#fb5f5f', c3:'#fb5f5f' }
+      ],
+      cohorts: [ { pct:'100%', w:'100%', label:'W1' }, { pct:'78%', w:'78%', label:'W2' }, { pct:'62%', w:'62%', label:'W3' }, { pct:'54%', w:'54%', label:'W4' } ],
+      events: [
+        { title:'HR · Payroll', body:"Maria's shift closed · 8h logged · tips AED 42.20 pooled", icon:'☖', bg:'#dbf7e8', fg:'#17a673' },
+        { title:'Bookkeeping', body:'Sale #12048 · AED 182.40 · VAT AED 8.68 · to ledger 4010 Sales', icon:'▤', bg:'#dbf7e8', fg:'#17a673' },
+        { title:'Marketing', body:'Customer added to "Marina · high-value repeat" segment · +140 pts', icon:'◁', bg:'#ffe1dc', fg:'#fb5f5f' }
+      ],
+      feed: [
+        { tag:'HR', text:'Kavya clocked out · 8h 12m · tips AED 34.60', time:'12:41', bg:'#dbf7e8', fg:'#17a673' },
+        { tag:'BK', text:'VAT filed · AED 2,847 to FTA · Jan cycle closed', time:'12:41', bg:'#dbf7e8', fg:'#17a673' },
+        { tag:'MK', text:'Campaign fired · 340 recipients · 12% opened', time:'12:41', bg:'#ffe1dc', fg:'#fb5f5f' }
+      ],
+      backoffice: [
+        { title:'Integrated HR', body:'Rosters, attendance, payroll, tips & commission — priced from POS shifts. WPS-ready payroll.', icon:'☖', bg:'#dbf7e8', fg:'#17a673' },
+        { title:'Integrated Bookkeeping', body:'Sales, VAT, expenses and settlements auto-post in real time. FTA e-invoicing built in.', icon:'▤', bg:'#dbf7e8', fg:'#17a673' },
+        { title:'Integrated Marketing', body:'SMS and email campaigns. Segments from live transactions, loyalty on one ledger.', icon:'◁', bg:'#ffe1dc', fg:'#fb5f5f' }
+      ],
+      ai: [
+        { title:'AI Lens', body:'Store cameras with computer vision. Shrinkage alerts, kitchen hygiene, queue analytics, staff coverage.', icon:'◎', bg:'#e8ecff', fg:'#4b56d2' },
+        { title:'AI Workflows', body:'No-code automations on live events. Auto-reorder low stock, auto-approve expenses, auto-86 items.', icon:'⋔', bg:'#f0e8ff', fg:'#7b4bd2' },
+        { title:'AI Insights', body:'Demand forecasting, price elasticity, best-seller trends — trained on your own sales, day one.', icon:'◿', bg:'#e8ecff', fg:'#4b56d2' }
+      ],
+      kits: [
+        { name:'y1000', price:'699', img:'assets/pos-handheld.png', bg:'rgba(255,255,255,0.04)', bd:'rgba(255,255,255,0.1)', body:'Rugged all-in-one handheld. Scan, bill, take payment, print — one device.',
+          specs:[{k:'Display',v:'6.5" HD+ touch'},{k:'Scanner',v:'Built-in 2D'},{k:'Card',v:'NFC + EMV'},{k:'Best for',v:'Floor billing'}] },
+        { name:'y4000', price:'1,099', img:'assets/pos-handheld.png', bg:'rgba(255,255,255,0.04)', bd:'rgba(255,255,255,0.1)', body:'10" tablet POS on a stand. Table-side ordering for restaurants & cafes. Splash-proof.',
+          specs:[{k:'Display',v:'10" HD+ touch'},{k:'Scanner',v:'Built-in barcode'},{k:'Card',v:'NFC + EMV'},{k:'Best for',v:'Restaurants & F&B'}] },
+        { name:'y5000', price:'1,999', img:'assets/pos-handheld.png', bg:'rgba(251,95,95,0.07)', bd:'rgba(251,95,95,0.5)', body:'Dual-screen counter POS. Staff-side flow, customer-facing payment.',
+          specs:[{k:'Display',v:'Dual 15.6" touch'},{k:'Split',v:'Staff + customer'},{k:'Printer',v:'80 mm built-in'},{k:'Best for',v:'Busy counters'}] },
+        { name:'y7000', price:'1,829', img:'assets/pos-handheld.png', bg:'rgba(255,255,255,0.04)', bd:'rgba(255,255,255,0.1)', body:'27-inch upright kiosk. Guests order, pay and earn loyalty themselves.',
+          specs:[{k:'Display',v:'27" upright touch'},{k:'Payments',v:'Card · QR · NFC'},{k:'Modes',v:'Retail · pickup'},{k:'Best for',v:'Self-checkout'}] },
+        { name:'y10 SoundBox', price:'699', img:'assets/pos-handheld.png', bg:'rgba(255,255,255,0.04)', bd:'rgba(255,255,255,0.1)', body:'105dB audio confirmation the moment the money lands. Never chase a customer again.',
+          specs:[{k:'Volume',v:'105 dB speaker'},{k:'Confirm',v:'< 3 seconds'},{k:'Connect',v:'4G + Wi-Fi'},{k:'Best for',v:'Busy tills · QR'}] }
+      ],
+      kds: [
+        { src:'TALABAT', item:'Chicken Biryani × 2  #8412', time:'02:14', bg:'#fff1ef', tagBg:'#ffe1dc', tagFg:'#e8484f' },
+        { src:'CAREEM', item:'Karak Chai × 4  #8413', time:'01:38', bg:'#fff', tagBg:'#dbf7e8', tagFg:'#17a673' },
+        { src:'DINE-IN', item:'Manakish Combo  T-06', time:'03:52', bg:'#fff', tagBg:'#ffe1dc', tagFg:'#e8484f' },
+        { src:'DELIVEROO', item:'Shawarma Wrap  #8415', time:'00:47', bg:'#fff', tagBg:'#e8ecff', tagFg:'#4b56d2' }
+      ],
+      pins: [
+        { name:'JLT', x:'22%', y:'16%', s:'10px' }, { name:'Downtown', x:'44%', y:'26%', s:'12px' },
+        { name:'Deira', x:'66%', y:'14%', s:'10px' }, { name:'Marina', x:'30%', y:'40%', s:'16px' },
+        { name:'Karama', x:'48%', y:'52%', s:'14px' }, { name:'Sharjah', x:'78%', y:'32%', s:'10px' },
+        { name:'Al Quoz', x:'36%', y:'66%', s:'10px' }, { name:'JBR', x:'62%', y:'62%', s:'10px' }
+      ],
+      compare: [
+        { feat:'Payment terminal', sub:'Card · QR · NFC', yc:'Yes', a:'✓ Yes', aFg:'#e8484f', b:'✓ Yes', bFg:'#e8484f' },
+        { feat:'Full POS & inventory', sub:'Not just checkout', yc:'Native', a:'Partner app', aFg:'#3c475d', b:'— No', bFg:'#8b93a4' },
+        { feat:'Restaurant KDS + aggregators', sub:'Talabat · Careem · Deliveroo', yc:'Native', a:'— No', aFg:'#8b93a4', b:'— No', bFg:'#8b93a4' },
+        { feat:'Integrated HR & payroll', sub:'WPS-ready, tips pooled', yc:'Included', a:'— No', aFg:'#8b93a4', b:'— No', bFg:'#8b93a4' },
+        { feat:'Integrated bookkeeping', sub:'FTA e-invoicing built in', yc:'Included', a:'— No', aFg:'#8b93a4', b:'— No', bFg:'#8b93a4' },
+        { feat:'Integrated marketing', sub:'Segments from live sales', yc:'Included', a:'— No', aFg:'#8b93a4', b:'— No', bFg:'#8b93a4' },
+        { feat:'AI Lens · Workflows · Insights', sub:'Vision, automation, forecasting', yc:'Included', a:'— No', aFg:'#8b93a4', b:'— No', bFg:'#8b93a4' },
+        { feat:'T+0 settlement to UAE IBAN', sub:'Emirates NBD · FAB · ADCB · Mashreq', yc:'T+0', a:'T+1', aFg:'#3c475d', b:'T+1', bFg:'#3c475d' },
+        { feat:'Live in your shop in', sub:'Box → first settled sale', yc:'60 minutes', a:'3–5 days', aFg:'#3c475d', b:'5–10 days', bFg:'#3c475d' },
+        { feat:'Starting price', sub:'All-in, per month', yc:'AED 199', a:'POS separate', aFg:'#3c475d', b:'POS separate', bFg:'#3c475d' }
+      ],
+      tierStandard: ['POS, billing & multi-tender','Inventory + batches & expiry','Supplier + auto-reorder','Loyalty (points / rewards)','Customer segments (500)'],
+      tierPower: ['Bulk import / export','Inter-outlet transfers','Gift cards & store credit','WebShop + social selling','Integrated HR + Bookkeeping','Integrated Marketing'],
+      tierEnt: ['Franchise / chain governance','White-label branded storefront','3PL logistics integrations','SSO (SAML / OIDC) + API keys','REST API & webhook access','Dedicated field ops rollout'],
+      addons: [
+        { name:'Integrated Marketing', price:'AED 35 /mo + per-msg', bd:'#efe3da' },
+        { name:'AI Insights', price:'AED 25 /mo per outlet', bd:'#efe3da' },
+        { name:'AI Lens', price:'AED 65 /mo + AED 25/cam', bd:'#efe3da' },
+        { name:'AI Workflows', price:'AED 45 /mo', bd:'#fb5f5f' },
+        { name:'Integrated Bookkeeping', price:'AED 29 /mo', bd:'#efe3da' },
+        { name:'Integrated HR', price:'AED 15 /staff · mo', bd:'#efe3da' },
+        { name:'WebShop & Social', price:'AED 19 /mo', bd:'#efe3da' },
+        { name:'Working Capital', price:'REV-SHARE · NO MONTHLY', bd:'#efe3da' }
+      ],
+      faqs: faqData.map(([q,a],i) => ({
+        q, a, open: S.openFaq === i, sign: S.openFaq === i ? '✕' : '+',
+        color: S.openFaq === i ? '#132340' : (S.openFaq === -1 && i === 1 ? '#e8484f' : '#132340'),
+        toggle: () => this.toggleFaq(i)
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
