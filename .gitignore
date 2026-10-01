@@ -1,6 +1,4 @@
 .DS_Store
-.thumbnail
-.vercel
-# design reference screenshots, not used by the site
-uploads/
-slices/
+node_modules/
+.vercel/
+.env*
