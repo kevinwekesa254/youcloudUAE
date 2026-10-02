@@ -32,7 +32,8 @@
       send: 'Send my details', completeTitle: "You're all set.", completeCopy: 'Your request is submitted successfully. Our team will contact you shortly.',
       nameErr: 'Enter your shop name.', phoneErr: 'Enter a valid phone number.', whatsappErr: 'Enter a valid WhatsApp number.', typeErr: 'Choose your business type.',
       consentErr: 'Please agree to be contacted before submitting.', maxErr: 'Choose up to 3 priorities.', sizeErr: 'Choose your business size.', onlineErr: 'Tell us if you sell online.', needsErr: 'Choose at least one priority.', sending: 'Sending…',
-      fail: "We couldn't send your details. Please try again.", close: 'Close'
+      fail: "We couldn't send your details just now.", failMail: 'Email your request to us instead', close: 'Close',
+      bookNow: 'Book my free 15-min call now', nudge: 'Short on time? Book now with these details — or continue so we can tailor your demo.'
     },
     ar: {
       stepOf: 'الخطوة {n} من 3', nudge: 'للحصول على عرض تجريبي أفضل، أكمل جميع الخطوات — يمكنك الإرسال الآن أيضاً.',
@@ -53,7 +54,8 @@
       send: 'أرسل بياناتي', completeTitle: 'كل شيء جاهز.', completeCopy: 'تم إرسال طلبك بنجاح. سيتواصل معك فريقنا قريباً.',
       nameErr: 'أدخل اسم متجرك.', phoneErr: 'أدخل رقم هاتف صالحاً.', whatsappErr: 'أدخل رقم واتساب صالحاً.', typeErr: 'اختر نوع نشاطك.',
       consentErr: 'يرجى الموافقة على التواصل قبل الإرسال.', maxErr: 'اختر حتى 3 أولويات.', sizeErr: 'اختر حجم نشاطك.', onlineErr: 'أخبرنا إن كنت تبيع عبر الإنترنت.', needsErr: 'اختر أولوية واحدة على الأقل.', sending: 'جارٍ الإرسال…',
-      fail: 'تعذّر إرسال بياناتك. يرجى المحاولة مرة أخرى.', close: 'إغلاق'
+      fail: 'تعذّر إرسال بياناتك الآن.', failMail: 'أرسل طلبك إلينا عبر البريد الإلكتروني', close: 'إغلاق',
+      bookNow: 'احجز مكالمتي المجانية لمدة 15 دقيقة الآن', nudge: 'وقتك ضيق؟ احجز الآن بهذه البيانات — أو تابع لنجهّز عرضاً يناسبك.'
     }
   };
 
@@ -63,7 +65,8 @@
   }
   function actions(n, withContinue) {
     return '<div class="lf-actions">' +
-      (withContinue ? '<button class="lf-btn lf-primary" id="lfContinue' + n + '" type="button" data-lt="continue"></button>'
+      (withContinue ? '<button class="lf-btn lf-primary" id="lfContinue' + n + '" type="button" data-lt="continue"></button>' +
+        (n === 1 ? '<button class="lf-btn lf-secondary" id="lfBookNow" type="button" data-lt="bookNow"></button><p class="lf-nudge" data-lt="nudge"></p>' : '')
         : '<button class="lf-btn lf-primary" id="lfSubmit" type="button" data-lt="send"></button>') +
       '<div class="lf-status" id="lfStatus' + n + '" role="status" aria-live="polite"></div></div>';
   }
@@ -250,17 +253,18 @@
 
   function post(url, body) {
     return fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body) })
-      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || j.success === false || j.success === 'false') throw Error(j.detail || j.message || ''); return true; }); })
-      .catch(function () { return false; });
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || j.success === false || j.success === 'false') throw Error(j.detail || j.message || ('HTTP ' + r.status)); return true; }); })
+      .catch(function (e) { if (window.console) console.warn('[demo form] ' + url + ' — ' + (e && e.message)); return false; });
   }
   function labelOf(name) {
     var x = form.querySelector('input[name="' + name + '"]:checked');
     return x ? (x.parentNode.querySelector('strong') || x.parentNode.querySelector('span')).textContent : '';
   }
   function emailBody(d) {
+    var quick = d.submissionStage === 'STEP_1';
     var needs = [].slice.call(form.querySelectorAll('input[name="needs"]:checked')).map(function (x) { return x.parentNode.textContent.replace('✓', '').trim(); });
     return {
-      _subject: 'New demo request — ' + d.businessName,
+      _subject: (quick ? 'New demo request (quick booking) — ' : 'New demo request — ') + d.businessName,
       _cc: NOTIFY.cc,
       _template: 'table',
       _captcha: 'false',
@@ -270,21 +274,26 @@
       'Phone': d.phone,
       'WhatsApp': d.whatsappNumber,
       'Business type': labelOf('businessType') + (d.businessType === 'OTHER' && $('lfOtherType').value.trim() ? ' — ' + $('lfOtherType').value.trim() : ''),
-      'Business size': labelOf('businessSize'),
-      'Sells online': labelOf('onlineSales'),
-      'Priorities': needs.join(', '),
-      'Notes': $('lfDesc').value.trim() || '—',
+      'Business size': (!quick && labelOf('businessSize')) || '—',
+      'Sells online': (!quick && labelOf('onlineSales')) || '—',
+      'Priorities': (!quick && needs.join(', ')) || '—',
+      'Notes': (!quick && $('lfDesc').value.trim()) || '—',
       'Language': d.language === 'ar' ? 'Arabic' : 'English',
       'Page': d.landingPage,
       'UTM source / medium / campaign': [d.utmSource, d.utmMedium, d.utmCampaign].filter(Boolean).join(' / ') || '—',
       'Submitted at': d.submittedAt
     };
   }
-  function send(button, statusId) {
+  function mailFallback(d) {
+    var e = emailBody(d), lines = [];
+    Object.keys(e).forEach(function (k) { if (k.charAt(0) !== '_') lines.push(k + ': ' + e[k]); });
+    return 'mailto:' + NOTIFY.to + '?cc=' + encodeURIComponent(NOTIFY.cc) + '&subject=' + encodeURIComponent(e._subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+  }
+  function send(button, statusId, stage) {
     var label = button.textContent, status = $(statusId);
     button.disabled = true; button.textContent = t('sending');
     status.className = 'lf-status'; status.textContent = '';
-    var d = payload('COMPLETE');
+    var d = payload(stage || 'COMPLETE');
     if (d.website) { // honeypot filled: pretend success, send nothing
       button.disabled = false; button.textContent = label; return Promise.resolve(true);
     }
@@ -297,7 +306,14 @@
         // Fire-and-forget: confirmation to the customer's WhatsApp.
         post(WA_CONFIRM_URL, { to: d.whatsappNumber, name: d.contactName, business: d.businessName, language: d.language });
       }
-      if (!ok) { status.className = 'lf-status error'; status.textContent = t('fail'); }
+      if (!ok) {
+        status.className = 'lf-status error';
+        status.innerHTML = '';
+        status.appendChild(document.createTextNode(t('fail') + ' '));
+        var a = document.createElement('a');
+        a.href = mailFallback(d); a.textContent = t('failMail');
+        status.appendChild(a);
+      }
       button.disabled = false; button.textContent = label;
       return ok;
     });
@@ -328,10 +344,14 @@
   form.addEventListener('submit', function (e) { e.preventDefault(); });
   modal.querySelectorAll('[data-lf-go]').forEach(function (b) { b.addEventListener('click', function () { go(Number(b.getAttribute('data-lf-go'))); }); });
   $('lfContinue1').addEventListener('click', function () { if (checkOne(true)) go(2); });
+  $('lfBookNow').addEventListener('click', function () {
+    if (sent || !checkOne(true)) return;
+    send($('lfBookNow'), 'lfStatus1', 'STEP_1').then(function (ok) { if (ok) { sent = true; showComplete(); } });
+  });
   $('lfContinue2').addEventListener('click', function () { if (checkTwo()) go(3); });
   $('lfSubmit').addEventListener('click', function () {
     if (sent || !checkOne(true) || !checkTwo() || !checkThree()) return;
-    send($('lfSubmit'), 'lfStatus3').then(function (ok) { if (ok) { sent = true; showComplete(); } });
+    send($('lfSubmit'), 'lfStatus3', 'COMPLETE').then(function (ok) { if (ok) { sent = true; showComplete(); } });
   });
   modal.querySelectorAll('.lf-lang').forEach(function (b) {
     b.addEventListener('click', function () { if (window.YC_applyLang) window.YC_applyLang(b.getAttribute('data-lfl'), true); else paint(); });
