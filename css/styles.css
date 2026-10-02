@@ -937,3 +937,16 @@ body.leaving main, body.leaving footer { opacity: 0; transform: translateY(8px);
   .lf-actions { margin-inline: -18px; padding-inline: 18px; }
 }
 @media (max-width: 380px) { .lf-three { grid-template-columns: 1fr; } }
+
+/* ---------- UAE Dirham symbol (CBUAE) ---------- */
+/* Drawn from assets/dirham.svg as a mask, so it takes the colour of the text around it. */
+.dh {
+  display: inline-block;
+  width: 0.92em;
+  height: 0.8em;
+  background-color: currentColor;
+  -webkit-mask: url(../assets/dirham.svg) no-repeat center / contain;
+  mask: url(../assets/dirham.svg) no-repeat center / contain;
+  vertical-align: -0.04em;
+  margin-inline-end: 0.14em;
+}
