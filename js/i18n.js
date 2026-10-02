@@ -32,7 +32,7 @@
     'c.aed60': '<span class="dh" role="img" aria-label="AED"></span>60',
     'c.aed19': '<span class="dh" role="img" aria-label="AED"></span>19',
     'c.aed189': '<span class="dh" role="img" aria-label="AED"></span>189',
-    'c.aed1099': '<span class="dh" role="img" aria-label="AED"></span>1,099',
+    'c.aed1199': '<span class="dh" role="img" aria-label="AED"></span>1,199',
     'c.aed1499': '<span class="dh" role="img" aria-label="AED"></span>1,499',
     'c.aed2999': '<span class="dh" role="img" aria-label="AED"></span>2,999',
     'c.aed39': '<span class="dh" role="img" aria-label="AED"></span>39',
@@ -381,7 +381,7 @@
     'h.q6': 'ماذا لو كنت أستخدم طلبات أو كريم أو ديليفرو بالفعل؟',
     'h.a6': 'احتفظ بها. تتدفق طلبات منصات طلبات وكريم وديليفرو مباشرة إلى شاشة مطبخ (KDS) موحّدة إلى جانب طلبات الصالة والطلبات المباشرة، مع إيقاف الأصناف النافدة على جميع القنوات خلال ثوانٍ. ويوفّر لك تطبيق مباشر بعلامتك التجارية 25–30% من العمولات على الطلبات المتكررة.',
     'h.q7': 'كم تكلفة الأجهزة؟',
-    'h.a7': 'تُشترى الأجهزة بدفعة واحدة (الأسعار لا تشمل ضريبة القيمة المضافة): الجهاز المحمول y1000 بسعر <span class="dh" role="img" aria-label="AED"></span>189، والجهاز اللوحي y4000 مع الحامل بسعر <span class="dh" role="img" aria-label="AED"></span>1,099، وجهاز الكاشير y5000 بسعر <span class="dh" role="img" aria-label="AED"></span>1,499، وكشك الطلب الذاتي y7000 بسعر <span class="dh" role="img" aria-label="AED"></span>2,999، وصندوق التنبيه الصوتي y10 بسعر <span class="dh" role="img" aria-label="AED"></span>39. كل طقم يُشحن في اليوم التالي مفعّلاً مسبقاً.',
+    'h.a7': 'تُشترى الأجهزة بدفعة واحدة (الأسعار لا تشمل ضريبة القيمة المضافة): الجهاز المحمول y1000 بسعر <span class="dh" role="img" aria-label="AED"></span>189، والجهاز اللوحي y4000 مع الحامل بسعر <span class="dh" role="img" aria-label="AED"></span>1,199، وجهاز الكاشير y5000 بسعر <span class="dh" role="img" aria-label="AED"></span>1,499، وكشك الطلب الذاتي y7000 بسعر <span class="dh" role="img" aria-label="AED"></span>2,999، وصندوق التنبيه الصوتي y10 بسعر <span class="dh" role="img" aria-label="AED"></span>39. كل طقم يُشحن في اليوم التالي مفعّلاً مسبقاً.',
 
     /* CTA */
     'h.cta.k': 'مستعد؟',
