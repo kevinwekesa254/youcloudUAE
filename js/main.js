@@ -285,10 +285,19 @@
         setSeg(segs[(i + dir + segs.length) % segs.length].getAttribute('data-seg'), true);
       });
     });
-    var startSeg = /fnb|restaurant|f&b/i.test(location.hash) ? 'fnb' : null;
+    var startSeg = /fnb|restaurant|f&b/i.test(location.hash) ? 'fnb' : /self/i.test(location.hash) ? 'self' : null;
     if (!startSeg) { try { startSeg = localStorage.getItem('yc-seg'); } catch (e) { startSeg = null; } }
     setSeg(startSeg && document.getElementById('plans-' + startSeg) ? startSeg : segs[0].getAttribute('data-seg'));
     window.addEventListener('resize', placeSegPill);
+    document.addEventListener('click', function (e) {
+      var l = e.target.closest('a[href^="#pricing-"]');
+      if (!l) return;
+      var id = l.getAttribute('href').replace('#pricing-', '');
+      if (!document.getElementById('plans-' + id)) return;
+      e.preventDefault();
+      setSeg(id);
+      document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+    });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeSegPill);
     document.addEventListener('yc:lang', function () { requestAnimationFrame(placeSegPill); });
   }
