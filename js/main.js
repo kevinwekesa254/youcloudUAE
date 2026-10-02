@@ -251,6 +251,43 @@
   dupStyle.textContent = '@media (min-width:1025px){.band-dup{display:none!important}}';
   document.head.appendChild(dupStyle);
 
+  /* ---------- Pricing: Retail / F&B toggle ---------- */
+  var segWrap = document.querySelector('.seg-toggle');
+  function setSeg(id, focus) {
+    if (!segWrap) return;
+    segWrap.querySelectorAll('button[data-seg]').forEach(function (b) {
+      var on = b.getAttribute('data-seg') === id;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+      b.tabIndex = on ? 0 : -1;
+      if (on && focus) b.focus();
+      var panel = document.getElementById('plans-' + b.getAttribute('data-seg'));
+      if (panel) {
+        panel.hidden = !on;
+        if (on) { panel.classList.remove('seg-in'); void panel.offsetWidth; panel.classList.add('seg-in'); panel.querySelectorAll('.reveal').forEach(function (r) { r.classList.add('in'); }); }
+      }
+    });
+    var on = segWrap.querySelector('button.on'), pill = segWrap.querySelector('.pill');
+    if (on && pill) { pill.style.left = on.offsetLeft + 'px'; pill.style.width = on.offsetWidth + 'px'; }
+    try { localStorage.setItem('yc-seg', id); } catch (e) { /* storage blocked */ }
+  }
+  if (segWrap) {
+    var segs = [].slice.call(segWrap.querySelectorAll('button[data-seg]'));
+    segs.forEach(function (b, i) {
+      b.addEventListener('click', function () { setSeg(b.getAttribute('data-seg')); });
+      b.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        var rtl = document.documentElement.dir === 'rtl', dir = (e.key === 'ArrowRight') !== rtl ? 1 : -1;
+        setSeg(segs[(i + dir + segs.length) % segs.length].getAttribute('data-seg'), true);
+      });
+    });
+    var startSeg = /fnb|restaurant|f&b/i.test(location.hash) ? 'fnb' : null;
+    if (!startSeg) { try { startSeg = localStorage.getItem('yc-seg'); } catch (e) { startSeg = null; } }
+    setSeg(startSeg && document.getElementById('plans-' + startSeg) ? startSeg : segs[0].getAttribute('data-seg'));
+    window.addEventListener('resize', function () { var on = segWrap.querySelector('button.on'); if (on) setSeg(on.getAttribute('data-seg')); });
+    document.addEventListener('yc:lang', function () { requestAnimationFrame(function () { var on = segWrap.querySelector('button.on'); if (on) setSeg(on.getAttribute('data-seg')); }); });
+  }
+
   /* ---------- FAQ accordion ---------- */
   document.querySelectorAll('.faq-q').forEach(function (q) {
     q.addEventListener('click', function () {
