@@ -253,6 +253,11 @@
 
   /* ---------- Pricing: Retail / F&B toggle ---------- */
   var segWrap = document.querySelector('.seg-toggle');
+  function placeSegPill() {
+    if (!segWrap) return;
+    var on = segWrap.querySelector('button.on'), pill = segWrap.querySelector('.pill');
+    if (on && pill) { pill.style.left = on.offsetLeft + 'px'; pill.style.width = on.offsetWidth + 'px'; }
+  }
   function setSeg(id, focus) {
     if (!segWrap) return;
     segWrap.querySelectorAll('button[data-seg]').forEach(function (b) {
@@ -267,8 +272,7 @@
         if (on) { panel.classList.remove('seg-in'); void panel.offsetWidth; panel.classList.add('seg-in'); panel.querySelectorAll('.reveal').forEach(function (r) { r.classList.add('in'); }); }
       }
     });
-    var on = segWrap.querySelector('button.on'), pill = segWrap.querySelector('.pill');
-    if (on && pill) { pill.style.left = on.offsetLeft + 'px'; pill.style.width = on.offsetWidth + 'px'; }
+    placeSegPill();
     try { localStorage.setItem('yc-seg', id); } catch (e) { /* storage blocked */ }
   }
   if (segWrap) {
@@ -284,8 +288,9 @@
     var startSeg = /fnb|restaurant|f&b/i.test(location.hash) ? 'fnb' : null;
     if (!startSeg) { try { startSeg = localStorage.getItem('yc-seg'); } catch (e) { startSeg = null; } }
     setSeg(startSeg && document.getElementById('plans-' + startSeg) ? startSeg : segs[0].getAttribute('data-seg'));
-    window.addEventListener('resize', function () { var on = segWrap.querySelector('button.on'); if (on) setSeg(on.getAttribute('data-seg')); });
-    document.addEventListener('yc:lang', function () { requestAnimationFrame(function () { var on = segWrap.querySelector('button.on'); if (on) setSeg(on.getAttribute('data-seg')); }); });
+    window.addEventListener('resize', placeSegPill);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeSegPill);
+    document.addEventListener('yc:lang', function () { requestAnimationFrame(placeSegPill); });
   }
 
   /* ---------- FAQ accordion ---------- */
